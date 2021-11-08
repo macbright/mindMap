@@ -1,11 +1,19 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Routes, Route, Link } from "react-router-dom";
+
+import Register from './components/Auth/Register';
+import Login from './components/Auth/Login';
+
 import styles from './app.module.scss';
 
 
 function App() {
   return (
     <div >
-     <h1 className={styles.main}> Hello Progidy</h1>
+     <Routes>
+        <Route path="/signup" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   );
 }

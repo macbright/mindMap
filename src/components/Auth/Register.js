@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 
 import { ReactComponent as Logo } from  '../../assets/logo.svg';
-import inputs from './inputs';
+import constant from './constant';
 import Slider from '../slider/Slider';
 import styles from './register.module.scss';
 
@@ -37,7 +37,7 @@ const Register = () => {
 
             <form  onSubmit={handleSubmit(onSubmit)}>
                 {
-                    inputs.map((input) =>
+                    constant.signupInputs.map((input) =>
                         (
                            <div className={styles.inputUpperDiv}> <div  key={input.label} className={styles.inputDiv}>
                                 <label >{input.label}</label>

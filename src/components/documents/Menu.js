@@ -1,5 +1,6 @@
 import React from "react";
 
+import Body from "./Body";
 import { ReactComponent as UserIcon } from '../../assets/user.svg';
 import { ReactComponent as Search } from '../../assets/search.svg';
 import { ReactComponent as DropDown } from '../../assets/dropDown.svg';
@@ -15,8 +16,6 @@ const Menu = () => {
           type="text"
           name="search"
           placeholder="Search for documents"
-          // {...register(input.name)} 
-          // className={ errors[input.name] ? styles.errorField : '' }
       /> 
      </div>
 
@@ -28,6 +27,8 @@ const Menu = () => {
        </div>
        <DropDown  className={styles.alignVer}/>
      </div>
+     <div className={styles.clearFix}></div>
+     <Body />
    </nav>
   );
 }

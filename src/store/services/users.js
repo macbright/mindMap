@@ -1,22 +1,30 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const baseUrl = "";
+const baseUrl = "https://waprojjourneyapi.azurewebsites.net/api/account";
 
 export const usersApi = createApi({
   reducerPath: "users",
   baseQuery: fetchBaseQuery({
     baseUrl,
+    "Content-Type": 'application/merge-patch+json'
 
   }),
   endpoints: (builder) => ({
     createUser: builder.mutation({
         query: (payload) => ({
-        url: '/user',
+        url: '/register',
         method: 'POST',
-        data: payload,
+        body: payload
         }),
     }),
+    loginUser: builder.mutation({
+      query: (payload) => ({
+      url: '/login',
+      method: 'POST',
+      body: payload
+      }),
+  }),
   })
 });
 
-export const { useCreateUserMutation } = usersApi;
+export const { useCreateUserMutation, useLoginUserMutation } = usersApi;

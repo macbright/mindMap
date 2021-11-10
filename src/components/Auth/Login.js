@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from "react-router-dom";
 import * as yup from 'yup';
@@ -9,6 +9,8 @@ import { ReactComponent as Logo } from  '../../assets/logo.svg';
 import constant from './constant';
 import Slider from '../slider/Slider';
 import styles from './register.module.scss';
+import {useLoginUserMutation} from "../../store/services/users";
+
 import moreStyles from './login.module.scss';
 
 
@@ -19,11 +21,22 @@ const schema = yup.object().shape({
 
 const Login = () => {
 
+    const [loginUser, { error, isSuccess: createSuccess }] =
+    useLoginUserMutation();
+ 
+
     const { register, handleSubmit, formState: { errors }, } = useForm({
         resolver: yupResolver(schema)
     })
 
-    const onSubmit = (data) => console.log('data: ', data)
+    useEffect(() => {
+        console.log('error message: ', error)
+    }, [error])
+
+    const onSubmit = (data) => {
+        console.log('login details', data)
+        loginUser(data)
+    }
     
 
    return (

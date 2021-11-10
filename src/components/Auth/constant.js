@@ -2,7 +2,7 @@ const constant = {
     signupInputs:[
         {
             label: 'Name',
-            name: 'name',
+            name: 'username',
             type: 'text',
         },
         {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from "react-router-dom";
 import * as yup from 'yup';
@@ -8,6 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ReactComponent as Logo } from  '../../assets/logo.svg';
 import constant from './constant';
 import Slider from '../slider/Slider';
+import {useCreateUserMutation} from "../../store/services/users";
+
 import styles from './register.module.scss';
 
 
@@ -20,11 +22,26 @@ const schema = yup.object().shape({
 
 const Register = () => {
 
+    const [createUser, { error, isSuccess: createSuccess }] =
+    useCreateUserMutation();
+ 
     const { register, handleSubmit, formState: { errors }, } = useForm({
         resolver: yupResolver(schema)
     })
 
-    const onSubmit = (data) => console.log('data: ', data)
+    useEffect(() => {
+        console.log('error: ', error)
+    }, [error])
+
+    const onSubmit = (data) => {
+        const userDetails = {
+            username: data.username,
+            email: data.email,
+            password: data.password,
+        }
+        console.log('user details: ', userDetails)
+        createUser(userDetails)
+    }
     
 
    return (
@@ -33,7 +50,8 @@ const Register = () => {
         <div className={styles.signupRight} >
             <h1> Let's get started </h1>
             <p className={styles.subheading}>Already have an account? <Link to="/login">Sign in</Link>
- </p>
+            </p>
+            <p className={styles.error}>{ error?.data}</p>
 
             <form  onSubmit={handleSubmit(onSubmit)}>
                 {

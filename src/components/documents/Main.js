@@ -4,7 +4,7 @@ import Menu from "./Menu";
 import LeftMenu from "./LeftMenu";
 
 
-import styles from "./menu.module.scss";
+import styles from "./main.module.scss";
 
 const Main = () => {
   
@@ -12,9 +12,6 @@ const Main = () => {
    <div className={styles.body}>
     <Menu />
     <LeftMenu />
-    
-
-     
    </div>
   );
 }

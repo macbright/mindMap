@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -21,8 +21,8 @@ const schema = yup.object().shape({
   });
 
 const Register = () => {
-
-    const [createUser, { error, isSuccess: createSuccess }] =
+    const navigate = useNavigate();
+    const [createUser, { error, isSuccess }] =
     useCreateUserMutation();
  
     const { register, handleSubmit, formState: { errors }, } = useForm({
@@ -31,7 +31,10 @@ const Register = () => {
 
     useEffect(() => {
         console.log('error: ', error)
-    }, [error])
+        if(isSuccess) {
+            navigate("/login")
+        }
+    }, [error, isSuccess])
 
     const onSubmit = (data) => {
         const userDetails = {
@@ -39,7 +42,6 @@ const Register = () => {
             email: data.email,
             password: data.password,
         }
-        console.log('user details: ', userDetails)
         createUser(userDetails)
     }
     

@@ -6,7 +6,7 @@ import { ReactComponent as Box } from '../../assets/box.svg';
 import { ReactComponent as Dots } from '../../assets/dots.svg';
 import list from "./documentList";
 
-import styles from "./menu.module.scss";
+import styles from "./body.module.scss";
 
 const Body = () => {
   

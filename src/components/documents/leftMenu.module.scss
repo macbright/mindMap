@@ -1,0 +1,46 @@
+.leftDiv{
+    height: 100vh;
+    background-color: #ffffff;
+    left: 0;
+    width: 200px;
+    padding-left: 25px;
+    box-sizing: border-box;
+
+    h2{
+        font-family: sans-serif;
+        color: #092657;
+        font-weight: 600;
+        margin: 0;
+        padding-top:  20px;
+        
+    }
+    
+    button {
+        background: #3C409E;
+        padding: 10px 15px;
+        color: #ffffff;
+        margin-top: 30px;
+        border: none;
+        border-radius: 8px;
+     
+    }
+
+    a{
+        color: #092657;
+        font-weight: 600;
+        font-size: 15px;
+        margin-left: 10px;
+        font-family: sans-serif;
+        
+       
+
+    }
+    .homeButton{
+        margin-top: 20px;
+    }
+    svg{
+        vertical-align: middle;
+    }
+
+
+}

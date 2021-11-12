@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import styles from "./menu.module.scss";
+import styles from "./leftMenu.module.scss";
 import { ReactComponent as HomeIcon } from '../../assets/home.svg';
 
 const LeftMenu = () => {

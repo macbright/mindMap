@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -21,8 +21,8 @@ const schema = yup.object().shape({
 
 const Login = () => {
 
-    const [loginUser, { error, isSuccess: createSuccess }] =
-    useLoginUserMutation();
+    const [loginUser, { data, error, isSuccess }] = useLoginUserMutation();
+    const navigate = useNavigate();
  
 
     const { register, handleSubmit, formState: { errors }, } = useForm({
@@ -31,11 +31,28 @@ const Login = () => {
 
     useEffect(() => {
         console.log('error message: ', error)
-    }, [error])
+        console.log('success: ', isSuccess, data)
+        if(isSuccess) {
+            storeJwt(data)
+            navigate("/recent-documents")
+        }
+    }, [error, isSuccess])
 
-    const onSubmit = (data) => {
-        console.log('login details', data)
-        loginUser(data)
+    useEffect(() => {
+        console.log('error message: ', error)
+        console.log('success: ', isSuccess, data)
+    }, [error, isSuccess])
+
+    const storeJwt = ({jwtToken, userId}) => {
+        localStorage.setItem('jwt',  jwtToken);
+        localStorage.setItem('userId',  userId);
+    }
+
+
+    const onSubmit = (result) => {
+        console.log('login details', result)
+        loginUser(result)
+        console.log('datas: ', data)
     }
     
 

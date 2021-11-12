@@ -15,8 +15,8 @@
     color: #092657;
     font-weight: 500;
     font-size: 18px;
-    margin: 20px;
-    padding-top: 20px;
+    padding: 20px;
+    margin: 0px !important;
 }
 section{
     background-color: #fff;
@@ -115,62 +115,65 @@ section{
 .secondSectionWrapperDiv{
     display: flex;
     padding-bottom: 30px;
-    border-bottom: 1px solid #E7ECF3;
     padding: 0px 30px;
+    width: 100%;
+
 
     button {
-        width: 150px;
+        width: 20%;
         height: 40px;
         padding: 8px 16px;
         margin-bottom: 10px;
         border-radius: 6px;
         border: 1px solid #ADB4CD;
         display: block;
-        color:  #3C409E;
-        background-color: #ffffff;
+        color:  #ffffff;
+        background-color: #3C409E;;
+        margin-top: 40px;
     }
 
-    .secondUpperInput{
-        width: 100%;
-        .inputDiv{
-            margin-top: 20px;
-            display: flex;
-            text-align: left;
-            flex-direction: column;
-            label {
-                color: #092657;
-                font-weight: 600;
-                font-size: 14px;
-                display: block;
-                padding-bottom: 5px;
-               
-            }
-        
-            input {
-                height: 18px;
-                width: 65%;
-                left: 0px;
-                top: 26px;
-                border-radius: 6px;
-                padding: 10px;
-                border: 2px solid #C1C7D1;
-                
-            }
-            input:hover {
-                border: 2px solid #5258DD;
-            }
-            input:active {
-                width: auto;   
-            }
-        
-            input:focus {
-                outline: 2px solid #3C409E;
-                min-width: 100px;
-            }
+    .inputDiv{
+        margin-top: 20px;
+        display: flex;
+        text-align: left;
+        flex-direction: column;
+        margin-right: 30px;
+        width: 30%;
+       
+        label {
+            color: #092657;
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            padding-bottom: 5px;
             
-            
-          }
+        }
     
-    }
+        input {
+            height: 18px;
+            width: 100%;
+            left: 0px;
+            top: 26px;
+            border-radius: 6px;
+            padding: 10px;
+            border: 2px solid #C1C7D1;
+            
+        }
+        input:hover {
+            border: 2px solid #5258DD;
+        }
+        input:active {
+            width: auto;   
+        }
+    
+        input:focus {
+            outline: 2px solid #3C409E;
+            min-width: 100px;
+        }
+        
+        
+        }
+    
+    
 
 }

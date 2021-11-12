@@ -35,31 +35,13 @@ const User = () => {
          </div>
        </section>
        <section className={styles.secondSection}>
+         <p className={styles.subHeading}>Change password</p>
            <div className={styles.secondSectionWrapperDiv}>
-
-            <div className={styles.secondUpperInput}>
-                <p className={styles.subHeading}>Change email addres</p>
-                <div className={styles.inputDiv} >
-                    <label >New email address </label> 
-                    <input type="text"
-                    placeholder={`Enter new e-mail `}
-                    name="email" /> 
-                </div>
-                <div className={styles.inputDiv} >
-                    <label >Current password </label> 
-                    <input type="text"
-                    placeholder={`Enter your password `}
-                    name="password" /> 
-                </div>
-                <button>Update email</button>
-            </div>
-            <div  className={styles.secondUpperInput}>
-                <p className={styles.subHeading}>Change password</p>
                 <div className={styles.inputDiv}>
-                    <label >Current password </label> 
-                    <input type="password"
-                    placeholder={`Enter your password `}
-                    name="email" className={  styles.errorField } /> 
+                        <label >Current password </label> 
+                        <input type="password"
+                        placeholder={`Enter your password `}
+                        name="email" className={  styles.errorField } /> 
                 </div>
                 <div className={styles.inputDiv}>
                     <label >New password</label> 
@@ -68,10 +50,6 @@ const User = () => {
                     name="password" className={  styles.errorField } /> 
                 </div>
                 <button>Update password</button>
-            </div>
-           </div>
-           <div> 
-           <button>Save changes</button>
            </div>
        </section>
 

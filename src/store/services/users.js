@@ -26,6 +26,26 @@ export const usersApi = createApi({
       body: payload
       }),
     }),
+    changePassword: builder.mutation({
+      query: (payload) => ({
+      url: 'api/account/changepassword',
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${getJwtToken()}`
+      },
+      body: payload
+      }),
+    }),
+    updateUser: builder.mutation({
+      query: ({payload, userId}) => ({
+      url: `api/user/${userId}`,
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${getJwtToken()}`
+      },
+      body: payload
+      }),
+    }),
     getUserById: builder.query({
       query: (id) => ({
       url: `/api/user/${id}`,
@@ -38,7 +58,8 @@ export const usersApi = createApi({
   })
 });
 
-export const { useCreateUserMutation, useLoginUserMutation } = usersApi;
+export const { useCreateUserMutation, useLoginUserMutation, 
+  useChangePasswordMutation, useUpdateUserMutation } = usersApi;
 const { useGetUserByIdQuery } = usersApi;
 
 

@@ -6,6 +6,7 @@ import Login from './components/Auth/Login';
 import ForgetPassword from './components/Auth/ForgetPassword';
 import Main from './components/documents/Main';
 import UserProfile from './components/userProfile/User';
+import MainCanvas from './components/canvas/MainCanvas';
 import PrivateRoute from './PrivateRoute';
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route exact path='/' element={<PrivateRoute/>}>
             <Route exact path='/recent-documents' element={<Main/>}/>
             <Route exact path='/user/:id' element={<Main/>}/>
+            <Route exact path='/draw' element={<MainCanvas />}/>
         </Route>
       </Routes>
     </div>

@@ -30,9 +30,28 @@ section{
     border-bottom: 1px solid #E7ECF3;
     padding: 0px 30px;
 
+    .saveChanges {
+        width: 300px;
+        height: 40px;
+        padding: 8px 16px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        border: 1px solid #ADB4CD;
+        display: block;
+        color: #fff;
+        background-color: #3C409E;
+        margin-top: 125px;
+    }
+
     .profileImage{
         display: flex;
         padding-bottom: 30px;
+        width: 100%;
+
+        svg{
+            width: 100%;
+            margin: 0;
+        }
 
         .imageDiv{
             margin-right: 20px;
@@ -46,18 +65,24 @@ section{
             display: flex;
             flex-direction: column;
             padding-top: 30px;
+            margin-top: 30px;
+            width: 100%;
+
+            
             button {
-                width: 150px;
+                max-width: 100%;
                 height: 40px;
                 padding: 8px 16px;
                 margin-bottom: 10px;
                 border-radius: 6px;
                 border: 1px solid #ADB4CD;
                 display: block;
+               
             }
             .uploadBtn {
                 color: #fff;
                 background-color: #3C409E;
+
             }
             .removeBtn {
                 color:  #3C409E;
@@ -69,8 +94,10 @@ section{
 
 }
 .profileInfoRight {
-    margin-left: 100px;
-    width: 100%;
+    width: 60%;
+    margin-left: 20px;
+    margin-right: 20px;
+
     .inputDiv{
         margin-top: 20px;
         display: flex;
@@ -87,7 +114,7 @@ section{
     
         input {
             height: 18px;
-            width: 70%;
+            width: 90%;
             left: 0px;
             top: 26px;
             border-radius: 6px;
@@ -114,7 +141,7 @@ section{
 
 .secondSectionWrapperDiv{
     display: flex;
-    padding-bottom: 30px;
+    padding-bottom: 30px !important;
     padding: 0px 30px;
     width: 100%;
 
@@ -176,4 +203,16 @@ section{
     
     
 
+}
+
+.error {
+    color : #DE3838;
+}
+
+.success{
+    color : green;
+}
+
+button {
+    cursor: pointer;
 }

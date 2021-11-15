@@ -1,0 +1,32 @@
+
+.main{
+    background-color: #E5E5E5;
+    border-left: 1px solid #E7E7E7;
+
+    margin-left: 8px;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+ 
+    
+
+
+    .canvas{
+
+        background-image: url("../../../assets/canvasArea.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 80%;
+        height: 80%;
+        margin: 0 auto;
+        // box-shadow: 10px -10px 5px #;
+  
+
+        // box-shadow:  0 0 5px #000;
+        
+
+    }
+}
+

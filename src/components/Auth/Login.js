@@ -38,10 +38,7 @@ const Login = () => {
         }
     }, [error, isSuccess])
 
-    useEffect(() => {
-        console.log('error message: ', error)
-        console.log('success: ', isSuccess, data)
-    }, [error, isSuccess])
+  
 
     const storeJwt = ({jwtToken, userId}) => {
         localStorage.setItem('jwt',  jwtToken);
@@ -63,6 +60,7 @@ const Login = () => {
             <h1> Sign in to Prodigy </h1>
             <p className={styles.subheading}>Don't have an account yet? <Link to="/signup">Sign Up </Link>
  </p>
+            <p className={styles.error}>{ error?.data}</p>
 
             <form  onSubmit={handleSubmit(onSubmit)}>
                 {

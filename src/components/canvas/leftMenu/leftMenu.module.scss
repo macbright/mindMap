@@ -1,0 +1,61 @@
+
+
+.main{
+    display: flex;
+
+    .leftMenu{
+        height: calc(100vh - 50px);
+        border-right: 1px solid #E7E7E7;
+        width: 15%;
+
+        div{
+            padding: 15px;
+            border-bottom: 1px solid #E7ECF3;
+            display: flex;
+            justify-content: space-between;
+    
+            p{
+                padding: 0;
+                margin: 0;
+                font-size: 14px;
+                color: #424242;
+            }
+    
+            svg{
+                margin-top: 7px;
+                cursor: pointer;
+            }
+        }
+    
+        .searchDiv{
+            display: flex;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            border: none;
+            border: 1px solid #E7E7E7;
+            border-radius: 10px;
+    
+            input {
+                height: 30px;
+                border: none;
+                width: 100%;
+                padding: 0px 10px;
+                
+            }
+    
+            input:focus {
+                outline: none;
+            }
+            svg{
+               padding-right: 8px;
+               cursor: pointer;
+        
+            }
+        }
+
+    }
+
+
+   
+}

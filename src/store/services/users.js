@@ -11,6 +11,7 @@ export const usersApi = createApi({
     "Content-Type": 'application/merge-patch+json'
 
   }),
+  tagTypes: ["Avatar"],
   endpoints: (builder) => ({
     createUser: builder.mutation({
         query: (payload) => ({
@@ -45,6 +46,7 @@ export const usersApi = createApi({
       },
       body: payload
       }),
+      providesTags: ['User'],
     }),
     getUserById: builder.query({
       query: (id) => ({
@@ -55,15 +57,44 @@ export const usersApi = createApi({
       method: 'GET',
       }),
     }),
+    changeUserAvatar: builder.mutation({
+      query: ({id, avatarData}) => ({
+        url: `/api/user/${id}/uploadavatar/file`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${getJwtToken()}`,
+          contentType: 'multipart/form-data',
+        },
+        body: avatarData,
+        
+      }),
+      invalidatesTags: ["Avatar"]
+    }),
+    getUserAvatar: builder.query({
+      query: (id) => ({
+        url: `/api/user/${id}/getavatar`,
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${getJwtToken()}`,
+        },
+      }),
+      providesTags: ["Avatar"]
+      
+    }),
   })
 });
 
 export const { useCreateUserMutation, useLoginUserMutation, 
-  useChangePasswordMutation, useUpdateUserMutation } = usersApi;
-const { useGetUserByIdQuery } = usersApi;
+  useChangePasswordMutation, useUpdateUserMutation, useChangeUserAvatarMutation } = usersApi;
+const { useGetUserByIdQuery, useGetUserAvatarQuery } = usersApi;
 
 
 export const useGetUserInfo = () => {
   const id = getUserId();
   return useGetUserByIdQuery(id, { skip: !id });
+};
+
+export const useGetUserAvatar = () => {
+  const id = getUserId();
+  return useGetUserAvatarQuery(id, { skip: !id });
 };

@@ -1,0 +1,87 @@
+
+
+.main{
+    background-color: #fff;
+    width: 360px;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 6px;
+    right: 0;
+    z-index: 10;
+    margin-right: 20px;
+    margin-top: 52px;
+
+
+    .cancelDiv{
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 20px;
+        border-bottom: 1px solid #E7E7E7;
+
+        p{
+            color: #3C409E;
+            font-size: 24px;
+        }
+
+        svg{
+            margin-top: 30px;
+            cursor: pointer;
+        }
+    }
+
+    .secondDiv{
+        padding: 10px 20px 20px 20px;
+    }
+
+    .jsonDiv, .pdfDiv{
+        border: 2px solid #C1C7D1;
+        border-radius: 6px;
+        padding: 10px; 
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0px;
+
+        .inputDiv{
+            margin-top: 12px;
+        }
+        
+        input{
+            border-radius: 50%;
+            margin: 0;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+
+        }
+
+        label{
+            color: #3C409E;
+            font-weight: 500;
+            font-size: 18px;
+            display: inline;
+            margin-left: 10px;
+
+        }
+        span{
+            display: block;
+            color: #6E7D97;
+            font-size:  14px;
+            margin-top: 5px;
+
+
+        }
+
+    }
+    button{
+        width: 100%;
+        color: #fff;
+        background-color: #3C409E;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        padding: 16px;
+
+    }
+
+}

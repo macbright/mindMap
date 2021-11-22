@@ -7,11 +7,11 @@ import LeftMenu from './leftMenu/LeftMenu';
 const MainCanvas = () => {
 
     return (
-        <di>
+        <div>
             <Menu />
             <LeftMenu />
 
-        </di>
+        </div>
     )
 }
 

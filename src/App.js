@@ -5,7 +5,6 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import ForgetPassword from './components/Auth/ForgetPassword';
 import Main from './components/documents/Main';
-import UserProfile from './components/userProfile/User';
 import MainCanvas from './components/canvas/MainCanvas';
 import PrivateRoute from './PrivateRoute';
 
@@ -15,7 +14,7 @@ import styles from './app.module.scss';
 
 function App() {
   return (
-    <div >
+    <div className={styles.main}>
      <Routes>
         <Route exact path="/signup" element={<Register />} />
         <Route exact path="/login" element={<Login />} />

@@ -11,7 +11,7 @@ export const usersApi = createApi({
     "Content-Type": 'application/merge-patch+json'
 
   }),
-  tagTypes: ["Avatar"],
+  tagTypes: ["User"],
   endpoints: (builder) => ({
     createUser: builder.mutation({
         query: (payload) => ({
@@ -46,7 +46,7 @@ export const usersApi = createApi({
       },
       body: payload
       }),
-      providesTags: ['User'],
+      invalidatesTags: ["User"]
     }),
     getUserById: builder.query({
       query: (id) => ({
@@ -56,6 +56,7 @@ export const usersApi = createApi({
       },
       method: 'GET',
       }),
+      providesTags: ["User"]
     }),
     changeUserAvatar: builder.mutation({
       query: ({id, avatarData}) => ({
@@ -68,7 +69,7 @@ export const usersApi = createApi({
         body: avatarData,
         
       }),
-      invalidatesTags: ["Avatar"]
+      invalidatesTags: ["User"]
     }),
     getUserAvatar: builder.query({
       query: (id) => ({
@@ -77,9 +78,7 @@ export const usersApi = createApi({
         headers: {
           Authorization: `Bearer ${getJwtToken()}`,
         },
-      }),
-      providesTags: ["Avatar"]
-      
+      }),      
     }),
   })
 });

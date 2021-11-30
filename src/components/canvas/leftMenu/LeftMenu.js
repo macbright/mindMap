@@ -1,18 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState, memo, useMemo} from 'react';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 
 import { ReactComponent as SideArrow } from '../../../assets/sideArrow.svg';
 import { ReactComponent as ShapesSearch } from '../../../assets/shapesSearch.svg';
 import { ReactComponent as ArrowDown } from '../../../assets/arrowDown.svg';
 import CanvasBoard from '../canvasBoard/CanvasBoard';
+import Shapes from './shapes/Shapes';
+
+import {useGetShapesQuery} from "../../../store/services/shapes";
+
 import styles from './leftMenu.module.scss';
 
 const LeftMenu = () => {
 
+    const { data = {}, isFetching: isLoadingList } = useGetShapesQuery()
+
     const [basicShapeToggle, setBasicShapeToggle] = useState(false);
     const [azureToggle, setAzureToggle] = useState(false);
 
+    // useEffect(() => {
+    //     const page = {
+    //         pageSize: 2
+    //     }
+    //     console.log('data: ', data)
+    // },[data])
+
     return (
+    <DndProvider backend={HTML5Backend}>
     <div className={styles.main}>
         <div className={styles.leftMenu}>
             <div>
@@ -26,20 +42,22 @@ const LeftMenu = () => {
             </div>
             </div>
             
-            <div className={styles.basicShapes}>
+            <div className={styles.toggleDiv}>
                 <p> Basic shapes</p>
                 {!basicShapeToggle && < SideArrow onClick={() => setBasicShapeToggle(!basicShapeToggle)}/>}
                 {basicShapeToggle && < ArrowDown  onClick={() => setBasicShapeToggle(!basicShapeToggle)}/>}
             </div>
-            <div className={styles.azure}>
+            <div className={styles.toggleDiv}>
                 <p> Azure 2019</p>
                 {!azureToggle && < SideArrow onClick={() => setAzureToggle(!azureToggle)}/>}
                 {azureToggle && < ArrowDown onClick={() => setAzureToggle(!azureToggle)} />}
             </div>
+            {azureToggle && < Shapes shapes={data.shapes} />}
         </div>
-        <CanvasBoard />
+        {data.shapes && <CanvasBoard shapes={data.shapes} />}
     </div>
+    </DndProvider>
     )
 }
 
-export default LeftMenu;
+export default memo(LeftMenu);

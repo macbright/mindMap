@@ -34,6 +34,13 @@
     display: flex;
     flex-direction: row;
 
+    img{
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
     p{
         color: #092657;
         font-size: 14px; 

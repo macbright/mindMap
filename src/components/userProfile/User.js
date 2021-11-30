@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import { set, useForm } from 'react-hook-form';
 
 import * as yup from 'yup';
@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { ReactComponent as UserRectangle } from '../../assets/userRectangle.svg';
 import {useGetUserInfo, useChangePasswordMutation, 
-    useUpdateUserMutation, useChangeUserAvatarMutation, useGetUserAvatar} from "../../store/services/users";
+    useUpdateUserMutation, useChangeUserAvatarMutation} from "../../store/services/users";
 
 import styles from "./user.module.scss";
 
@@ -22,14 +22,14 @@ const schema = yup.object().shape({
 const User = () => {
 
     const avatarData = new FormData();
+    const inputFile = useRef('');
 
     const { data, isLoading } = useGetUserInfo();
-    const { data: userAvatar, isLoading: avatarLoading } = useGetUserAvatar();
     const [changePassword, {  error: passwordError, isSuccess: passwordSuccess }] = useChangePasswordMutation();
     const [updateUser, {  error: userUpdateError, isSuccess: userUpdateSuccess }] = useUpdateUserMutation();
     const [changeUserAvatar, {  error: avatarUpdateError, isSuccess: avatarUpdateSuccess }] = useChangeUserAvatarMutation();
 
-    const [avatar, setAvatar] = useState(null);
+    const [avatar, setAvatar] = useState('');
 
     const { register, reset, handleSubmit, formState: { errors }, } = useForm({
         resolver: yupResolver(schema)
@@ -42,9 +42,9 @@ const User = () => {
     })
   }, [data])
 
-  useEffect(() => {
-        console.log('user avatar: ', userAvatar)
-  }, [userAvatar, avatarUpdateSuccess])
+//   useEffect(() => {
+//         // console.log('user avatar: ', userAvatar)
+//   }, [userAvatar, avatarUpdateSuccess])
 
   const handleAvatarChange = (result) => {
     setAvatar(result.target.files[0])
@@ -57,7 +57,9 @@ const User = () => {
         avatarData
     }
     if(avatar){
-        changeUserAvatar(payload)   
+        changeUserAvatar(payload)
+        console.log('ref: ', inputFile.current.value)
+        inputFile.current.value = ''
     } 
   }
 
@@ -71,7 +73,6 @@ const User = () => {
   }
 
   const updatePassword = (inputs) => {
-      console.log('inputs: ', inputs)
       const payload = {
           password: inputs.password,
           newPassword: inputs.newPassword,
@@ -95,13 +96,12 @@ const User = () => {
             <div className={styles.profileImage}>
                 <div className={styles.imageDiv}>
                     <p>Change photo</p>
-                    {!userAvatar && <UserRectangle />}
-                    {userAvatar && <img src={`data:image/png;base64, ${userAvatar.Content}`}/>}
+                    {!data && <UserRectangle />}
+                    {data && <img src={`data:image/png;base64, ${data.avatarContent}`} />}
                 </div>
                 <div className={styles.imageButtonDiv}>
-                    <input className={styles.ok} type="file" name="avatar" accept="image/*" onChange={handleAvatarChange}/>
+                    <input className={styles.ok} type="file" name="avatar" accept="image/*" onChange={handleAvatarChange}  ref={inputFile}/>
                     <button className={styles.uploadBtn} type="submit" onClick={handleAvatarUpload} >Upload </button>
-                    <button className={styles.removeBtn}>Remove</button>
                 </div>
             </div>
             <div className={styles.profileInfoRight}>

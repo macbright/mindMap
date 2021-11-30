@@ -1,0 +1,30 @@
+
+
+.main{
+    display: flex;
+    flex-flow: row wrap;
+    position: relative;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 20px;
+
+    .divImage{
+        margin: 4px;
+        flex: 0 1 calc(20% - 8px); 
+
+        img{
+            width: 100%;
+            cursor: pointer;
+            z-index: 100;
+        }
+    }
+
+ 
+    
+}
+.border{
+    border: 5px solid #000
+
+}
+
+

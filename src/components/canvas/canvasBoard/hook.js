@@ -16,8 +16,30 @@ export function checkLeftNtop(position){
 }
 
 export function checkImageId(imageId){
-  if(imageId === undefined){
+  
     return uuidv4()
-  }
-  return imageId
+
+}
+
+export const imageDialogue = (left, top, handleDelete) => {
+  return (
+      <div style={{ 
+          backgroundColor: 'white',
+          position: 'absolute',
+          height: '200px',
+          width: '100px',
+          zIndex: '200',
+          borderRadius: '15px',
+          padding: '25px',
+          transform: `translate3d(${left + 100}px, ${top + 300}px, 0)`,
+          }}>
+              <p onClick={handleDelete}>
+                  delete
+              </p>
+              <p>
+                  rename
+              </p>
+              
+  </div>)
+ 
 }

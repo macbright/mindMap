@@ -32,7 +32,6 @@ const Menu = () => {
     navigate("/login")
   }
   const handleUserSetting = () => {
-    console.log(data)
     setUserInfo(!userInfo)
     setToggle(!toggle);
     navigate(`/user/${data.id}`, {skipLocationChange: true});

@@ -1,6 +1,7 @@
 import React, {useState, memo, useMemo} from 'react';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import {ReactFlowProvider} from 'react-flow-renderer';
 
 
 import { ReactComponent as SideArrow } from '../../../assets/sideArrow.svg';
@@ -28,7 +29,7 @@ const LeftMenu = () => {
     // },[data])
 
     return (
-    <DndProvider backend={HTML5Backend}>
+    <ReactFlowProvider>
     <div className={styles.main}>
         <div className={styles.leftMenu}>
             <div>
@@ -52,11 +53,11 @@ const LeftMenu = () => {
                 {!azureToggle && < SideArrow onClick={() => setAzureToggle(!azureToggle)}/>}
                 {azureToggle && < ArrowDown onClick={() => setAzureToggle(!azureToggle)} />}
             </div>
-            {azureToggle && < Shapes shapes={data.shapes} />}
+            {azureToggle && < Shapes shapes={data.shapes.$values} />}
         </div>
-        {data.shapes && <CanvasBoard shapes={data.shapes} />}
+        {data.shapes && <CanvasBoard shapes={data.shapes.$values} />}
     </div>
-    </DndProvider>
+    </ReactFlowProvider>
     )
 }
 

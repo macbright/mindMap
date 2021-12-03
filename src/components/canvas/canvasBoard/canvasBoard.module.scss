@@ -27,6 +27,11 @@
         background-image: url("../../../assets/canvasArea.svg");
         background-repeat: no-repeat;
         background-size: cover;
+
+        .react-flow__edge-path{
+            stroke: #000 !important;
+            stroke-width: 1px !important;
+        }
         
 
     }

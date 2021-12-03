@@ -1,7 +1,7 @@
 import React, {memo, useEffect} from 'react';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import { v4 as uuidv4 } from 'uuid';
+
 
 
 
@@ -19,30 +19,23 @@ function getStyles(left, top, isDragging) {
     } ;
 }
 
-const Shape = ({url, id, left, top, checkDrag}) => {
+const Shape = ({url, id, checkDrag}) => {
 
-    const [{isDragging}, drag, preview] = useDrag(() => ({
-        type: "shape",
-        item: {id, left, top},
-        collect: (monitor) => ({
-            isDragging: monitor.isDragging()
-        })
-    }), [id, left, top])
+    const onDragStart = (event, nodeType) => {
+        event.dataTransfer.setData('application/reactflow', nodeType);
+        event.dataTransfer.effectAllowed = 'move';
+        event.dataTransfer.setData('src', url) 
+        event.dataTransfer.setData('id', id) 
+      };
 
-    useEffect(() => {
-
-    }, [drag]);
-
-
-    const handleClick = () => {
-        console.log('shape clicked')
-    }
+    
     return (
-         <div ref={drag} onClick={handleClick}   >
+         <div   >
             <img 
             src={`data:image/png;base64, ${url}`} 
             className={styles.image} 
             key={id}
+            onDragStart={(event) => onDragStart(event, "custom")} 
             
         />
         </div>

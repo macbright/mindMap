@@ -1,51 +1,66 @@
-import React, {memo, useEffect} from 'react';
-import { useDrag } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd-html5-backend';
-import { v4 as uuidv4 } from 'uuid';
+import React, {memo, useEffect, useState} from 'react';
+import Moveable from "react-moveable";
+
+import MoveableHelper from "moveable-helper";
+
+import { imageDialogue } from '../../canvasBoard/hook';
+import styles from './shapes.module.scss';
 
 
 
-function getStyles(left, top, isDragging) {
-    const transform = `translate3d(${left}px, ${top}px, 0)` ;
-    return {
-        position: 'fixed',
-        transform ,
-        WebkitTransform: transform,
-        opacity: isDragging ? 0 : 1,
-        height: isDragging ? 0 : '',
-        zIndex: 150,
-    } ;
-}
 
-const DrawShape = ({url, id, imageId, left, top, isDragging}) => {
+const DrawShape = ({ src, left, top, handleDelete}) => {
 
-    const [{}, drag, preview] = useDrag(() => ({
-        type: "shape",
-        item: {id, imageId, left, top},
-        collect: (monitor) => ({
-            isDragging: monitor.isDragging()
-        })
-    }), [ id, left, top])
+    console.log('left: ', left)
+    const [target, setTarget] = useState();
+
+    const [helper] = useState(() => {
+        return new MoveableHelper();
+    })
+    const [imageProp, setImageProp] = useState(false)
 
 
+    const handleClick = (e) => {
+        setTarget(e.target);
+        console.log(e.target.style)
+        setImageProp(false);
+    }
 
-    useEffect(() => {
-        console.log('left: ', left)
-        console.log('styles: ', getStyles(left, top, isDragging))
-    }, []);
+    const handleContext = (e) => {
+        e.preventDefault();
+        console.log('right click')
+        setImageProp(!imageProp);
+        
+    }
 
-    const handleClick = () => {
-        console.log('shape clicked')
+    const handleDoubleClick = (e) => {
+        setTarget("");
     }
     return (
-
+        <>
+            <Moveable
+                target={target}
+                resizable={true}
+                rotatable={true}
+                onResizeStart={helper.onResizeStart}
+                onResize={helper.onResize}
+                onRotateStart={helper.onRotateStart}
+                onRotate={helper.onRotate}
+                className={styles.target}
+                
+        />
             <img 
-            src={`data:image/png;base64, ${url}`} 
-            style={getStyles(left, top, isDragging)} onClick={handleClick}
-            ref={drag} 
-            role="Shape"
+            src={src}
+            onClick={handleClick}
+            onDoubleClick={handleDoubleClick}
+            onContextMenu={handleContext}
+            
+            // key={key}
+            // className="target"
+            dir="rtl"
          />
-    
+            {imageProp && imageDialogue(left, top, handleDelete)}
+        </>
         
     )
 }

@@ -1,27 +1,76 @@
-import React, {useState, useEffect, memo, useCallback} from 'react';
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import React, {useState, useEffect, memo, useCallback, useRef} from 'react';
 import { useDrop } from "react-dnd";
 import {checkLeftNtop, checkImageId} from './hook';
+import ReactFlow, { addEdge, Controls, MiniMap, removeElements } from 'react-flow-renderer';
 
 
 import DrawShape from "../leftMenu/shapes/DrawShape"
-import Shape from "../leftMenu/shapes/shape"
+import CustomNode from './NodeHandle';
+import CustomEdge from './CustomEdge';
+
+
 
 import styles from './canvasBoard.module.scss';
 
+const edgeTypes = {
+  custom: CustomEdge,
+};
+
+
+
 const CanvasBoard = ({ shapes }) => {
 
+  const reactFlowWrapper = useRef(null);
+  const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [board, setBoard] = useState({})
-
-  
+  const [elements, setElements] = useState([]);
 
   useEffect(() => {
-    console.log("shapess: ", board);
-  }, [board]);
+    
+    console.log('elements ', elements)
+    console.log('board ', board)
+  }, [elements]);
+
+  const onElementsRemove = (elementsToRemove) =>
+  setElements((els) => removeElements(elementsToRemove, els));
+
+  const onLoad = (_reactFlowInstance) =>
+  setReactFlowInstance(_reactFlowInstance);
+
+  const onDragOver = (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'move';
+  };
+
+    
+  const onDrop = (event) => {
+    event.preventDefault();
+    const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
+    const type = event.dataTransfer.getData('application/reactflow');
+    const url = event.dataTransfer.getData('src');
+    const id = event.dataTransfer.getData('id');
+    const position = reactFlowInstance.project({
+      x: event.clientX - reactFlowBounds.left,
+      y: event.clientY - reactFlowBounds.top,
+    });
+
+    const newNode = {
+      id: checkImageId(),
+      type,
+      position,
+      data: {label: <DrawShape  src={`data:image/png;base64, ${url}`}  />},
+      arrowHeadType: '',
+    };
+
+     if (type === "custom" && !event.source )   moveShapes(id, newNode.id,  position.x, position.y)
+
+     if (type === "custom" && type !== undefined) setElements((es) => es.concat(newNode));
+  };
+
+
 
   const moveShapes = useCallback((id, imageId, left, top) => {
-    console.log("shapess: ", board);
-
     if(!shapes){
       return null;
     }
@@ -29,57 +78,61 @@ const CanvasBoard = ({ shapes }) => {
     setBoard(prevState => ({
       ...prevState, 
       [imageId]: {
-        url: selectShape[0].content,
-        id: selectShape[0].id,
-        left: left,
-        top: top,
-        imageId: imageId,
+        id: id,
+        position: {x: left, y: top},
+        type: "custom",
+        url: selectShape[0]?.content
       }
     }))
-}, [board]);
+  }, [board]);
 
-    const [{isOver}, drop] = useDrop(() => ({
-      accept: "shape",
-      drop(item, monitor){
-        const position = monitor.getDifferenceFromInitialOffset();
+    const NODE_TYPES = {
+      yourType: CustomNode,
+    };
     
-        let left = Math.round( checkLeftNtop(item.left) + position.x ) ;
-        let top = (checkLeftNtop(item.top) + position.y );
-        console.log('left ', left)
-        // if(snapToGrid){
-        //   ;
-        //   [left, top] = doSnapToGrid(left, top)
-        // }
-        moveShapes(item.id, checkImageId(item.imageId), left, top)
-      }
 
-    }),[moveShapes])
 
+    const onConnect = (params) => setElements(e => addEdge(params,e));
 
     return(
-
-       
-      <div className={styles.main} >
-                  <div 
-                  ref={drop}
+      <div className={styles.main} ref={reactFlowWrapper} >
+                <ReactFlow 
                   className={styles.canvas}
+                  elements={elements}
+                  onLoad={onLoad}
+                  onConnect={onConnect}
+                  onElementsRemove={onElementsRemove}
+                  onDrop={onDrop}
+                  nodeTypes={NODE_TYPES}
+                  onDragOver={onDragOver}
+                  connectionLineStyle={{stroke: "#000", strokeWidth: 3}}
+                  // connectionLineType="bezier"
+                  minZoom={0.2}
+                  edgeTypes={edgeTypes}
+                  snapToGrid={true}
+                  snapGrid={[16, 16]}
+    
+
                     style={{
-                        width: "70vw",
-                        height: "70vh",
-                        pointerEvents: "auto !important",
-                        position: 'relative',
-                        zIndex: 100,
+                        width: "80vw",
+                        height: "85vh",
                       }}
                       
                       role={'Dustbin'}
                     >
-                      {
-                        Object.keys(board).map((key) => {
-                          return <DrawShape key={key}  {...board[key]} checkDrag={false} />
-                        })
-                      }
+                      <Controls />
+                      {/* <Background
+                        color="#888"
+                        gap={16}
+                        /> */}
+                        <MiniMap 
+                        nodeColor={n=>{
+                            if(n.type === 'input') return 'blue';
+                            
+                            return '#FFCC00'
+                        }} />
                     
-                    </div>
+                  </ReactFlow>
 
         </div>
     )
@@ -87,62 +140,3 @@ const CanvasBoard = ({ shapes }) => {
 
 export default memo(CanvasBoard);
 
-
-
-{/* <div className={styles.main}>
-            <TransformWrapper
-                 initialScale={0.8}
-                 maxScal={8}
-                 minScale={0.1}
-                 limitToBounds={false}
-                 wheel={{ disabled: false }}
-                 zoomIn={{ step: 2 }}
-                 zoomOut={{ step: 2 }}
-                 centerOnInit={true}
-        >
-            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-             <>
-               <div
-                 style={{
-                   position: "absolute",
-                   bottom: "10px",
-                   right: "10px",
-                   zIndex: 100,
-                   backgroundColor: '#fff',
-                   padding: '15px'
-                 }}
-               >
-                 <button onClick={() => zoomIn(0.1)}>+</button>
-                 <button style={{ marginLeft: "10px" }} onClick={() => zoomOut(0.1)}>
-                   -
-                 </button>
-                 <button style={{ marginLeft: "10px" }} onClick={() => resetTransform()}>
-                   x
-                 </button>
-               </div>
-                <TransformComponent>
-                    <div className={styles.canvas}
-                    style={{
-                        width: "100vw",
-                        height: "90vh",
-                        pointerEvents: "auto !important",
-                        position: 'relative',
-                        zIndex: 200,
-                      }}
-                      ref={drop}
-                      role={'Dustbin'}
-                      // onDrop={addShapeToBoard}
-                    >
-                      {
-                        board.map((shape) => {
-                          return <DrawShape url={shape.url} id={shape.id} left={shape.left} top={shape.top} isDragging={false} />
-                        })
-                      }
-                    
-                    </div>
-                </TransformComponent>
-                </>
-           )}
-            </TransformWrapper>
-
-        </div> */}

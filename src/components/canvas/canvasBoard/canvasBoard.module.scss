@@ -1,0 +1,48 @@
+
+.main{
+    background-color: #E5E5E5;
+    border-left: 1px solid #E7E7E7;
+
+    margin-left: 8px;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        background: none; 
+        border: none;
+        font-size: 30px;
+        color: #424242;
+
+        padding: 0px 15px;
+    }
+ 
+    
+
+
+    .canvas{
+        
+        background-image: url("../../../assets/canvasArea.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        // .react-flow__edge-path{
+        //     stroke: #000 !important;
+        //     stroke-width: 1px !important;
+        // }
+        
+
+    }
+}
+
+// .edges{
+//     stroke: #000 !important;
+//     stroke-width: 2px !important;
+
+//     svg{
+//         color: #000 !important;
+//         font-size: 18px !important;
+//     }
+// }

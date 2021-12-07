@@ -1,0 +1,120 @@
+
+
+
+  .form{
+    // display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+  }
+  
+  .signupDiv {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+  }
+
+  .signupRight{
+      width: 100%;
+      margin-top: 100px;
+      text-align: center;
+
+      h1{
+          color: #092657
+      }
+      .subheading{
+          color: #6E7D97
+      }
+      a{
+        color: #092657;
+        text-decoration: underline;
+      }
+   }
+  
+  .inputDiv{
+    margin-top: 20px;
+    display: inline-block;
+    text-align: left;
+   
+
+
+    label {
+        color: #092657;
+        font-weight: 600;
+        font-size: 14px;
+        display: block;
+        padding-bottom: 5px;
+       
+    }
+
+    input {
+        height: 18px;
+        width: 338px;
+        left: 0px;
+        top: 26px;
+        border-radius: 6px;
+        padding: 10px;
+        border: 2px solid #C1C7D1;
+        
+
+        
+    }
+    input:hover {
+        border: 2px solid #5258DD;
+    }
+
+    input:focus {
+        border: 2px solid #3C409E;
+    }
+    
+    
+  }
+
+  .errorField {
+    border: 2px solid #DE3838 !important;
+  }
+
+  .error {
+      color : #DE3838;
+  }
+  .termService{
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-family: 'Roboto';
+
+      input {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+          vertical-align: middle;
+          cursor: pointer;
+
+      }
+      input:checked{
+          background-color: #3C409E !important;
+      }
+
+      a{
+          color: #092657;
+          text-decoration: underline;
+      }
+  }
+
+  .createBtn{
+    height: 40px;
+    width: 358px;
+    border-radius: 6px;
+    padding: 10px;
+    background-color:  #3C409E;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+
+  .createBtn:hover{
+    background: #454AC7;
+    cursor: pointer;
+}
+
+.logo{
+    margin-top: 10px;
+}

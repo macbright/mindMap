@@ -1,0 +1,58 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    height:  50px;
+    border-bottom: 1px solid #E7E7E7;
+
+
+    ul {
+        margin: 0px;
+        
+    }
+
+    .menuItems{
+        display: flex;
+      
+
+        .logo{
+            border-right: 1px solid #E7E7E7;
+            margin-left: 0px;
+            
+            svg{
+               height: 25px;
+            }
+            
+        }
+
+        li{
+           margin: 0px 10px; 
+           list-style: none;
+           padding-top: 15px;
+           padding-right: 10px;
+           line-height: 18px;
+           font-size: 14px;
+           color: #424242;
+           cursor: pointer;
+        }
+    }
+
+    .navRight{
+        display: flex;
+
+        p{
+            font-size: 16px;
+            color: #3C409E;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        svg{
+            margin: 18px 15px;
+        }
+    }
+
+    svg{
+        cursor: pointer;
+    }
+
+}

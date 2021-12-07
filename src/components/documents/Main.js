@@ -1,7 +1,7 @@
 import React from "react";
 
-import Menu from "./Menu";
-import LeftMenu from "./LeftMenu";
+import Menu from "./menu/Menu";
+import LeftMenu from "./leftMenu/LeftMenu";
 
 
 import styles from "./main.module.scss";

@@ -24,6 +24,7 @@
     "react-flow-renderer": "^9.6.11",
     "react-hook-form": "^7.12.2",
     "react-loader-spinner": "^4.0.0",
+    "react-modal": "^3.14.4",
     "react-moveable": "^0.30.3",
     "react-redux": "^7.2.4",
     "react-router-dom": "^6.0.1",

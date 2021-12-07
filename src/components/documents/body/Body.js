@@ -1,10 +1,10 @@
 import React from "react";
 
-import { ReactComponent as DropDown } from '../../assets/dropDown.svg';
-import { ReactComponent as Hamburger } from '../../assets/hamburger.svg';
-import { ReactComponent as Box } from '../../assets/box.svg';
-import { ReactComponent as Dots } from '../../assets/dots.svg';
-import list from "./documentList";
+import { ReactComponent as DropDown } from '../../../assets/dropDown.svg';
+import { ReactComponent as Hamburger } from '../../../assets/hamburger.svg';
+import { ReactComponent as Box } from '../../../assets/box.svg';
+import { ReactComponent as Dots } from '../../../assets/dots.svg';
+import list from "../documentList/documentList";
 
 import styles from "./body.module.scss";
 

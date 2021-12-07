@@ -1,0 +1,79 @@
+.moda {
+    // position: absolute;
+    // top: 40px;
+    // left: 40px;
+    // right: 40px;
+    // bottom: 40px;
+    width: 30%;
+    // background-color: papayawhip;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: rgba(0,0,0,0.7);
+    margin: 0 auto;
+    // min-width: 210px;
+    padding: 40px;
+    // width: 30%;
+    // margin-top: 100px;
+  }
+//   .customStyles {
+//     top: 50%;
+//     left: 50%;
+//     right: auto;
+//     bottom: auto;
+//     margin-right: -50%;
+//     transform: translate(-50%, -50%);
+//   }
+
+.inputDiv{
+    width: 50%;
+    margin-right: 20px;
+    float: left;
+
+    input {
+        height: 30px;
+        width: 100%;
+        left: 0px;
+        top: 26px;
+        border-radius: 6px;
+        padding: 10px;
+        border: none;
+        background-color: #F8F9FD;
+       
+        
+    }
+    input:hover {
+        border: 2px solid #5258DD;
+    }
+
+    input:focus {
+        border: 2px solid #3C409E;
+        
+    }
+    input:active {
+        outline: #3C409E;
+    }
+
+}
+.closeButton{
+    float: right;
+    background: #3C409E;
+    padding: 10px 15px;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+}
+.submit{
+    background: #3C409E;
+    padding: 10px 15px;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    margin-top:  25px;
+}

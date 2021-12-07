@@ -2,15 +2,15 @@ import React, { useEffect, useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 
-import Body from "./Body";
-import UserProfile from "../userProfile/User";
+import Body from "../body/Body";
+import UserProfile from "../../userProfile/User";
 
-import { ReactComponent as UserIcon } from '../../assets/user.svg';
-import { ReactComponent as Search } from '../../assets/search.svg';
-import { ReactComponent as DropDown } from '../../assets/dropDown.svg';
-import { ReactComponent as Logout } from '../../assets/logout.svg';
-import { ReactComponent as Setting } from '../../assets/setting.svg';
-import {useGetUserInfo} from "../../store/services/users";
+import { ReactComponent as UserIcon } from '../../../assets/user.svg';
+import { ReactComponent as Search } from '../../../assets/search.svg';
+import { ReactComponent as DropDown } from '../../../assets/dropDown.svg';
+import { ReactComponent as Logout } from '../../../assets/logout.svg';
+import { ReactComponent as Setting } from '../../../assets/setting.svg';
+import {useGetUserInfo} from "../../../store/services/users";
 
 import styles from "./menu.module.scss";
 

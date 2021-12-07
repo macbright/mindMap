@@ -1,0 +1,94 @@
+
+.heading{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+
+    h4{
+        color: #092657;
+        font-family: 'Roboto';
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .rightHeader{
+        display: inline-flex;
+        padding-top: 25px;
+
+        .lastModified{
+            display: inline-flex; 
+
+            p{
+                color: #092657;
+                font-family: 'Roboto';
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+            svg{
+                padding-top: 20px;
+                margin-left: 10px;
+            }
+            
+        }
+        .leftIcons{
+            margin-left: 50px;
+
+            svg{
+                padding-top: 18px;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+.docView{
+    background-color: #ffffff;
+    margin: 5px 30px 50px 30px;
+
+    .docHeading{
+        padding: 4px 30px;
+        border-bottom: 1px solid #E7ECF3;
+
+        p{
+            color: #6E7D97;
+            font-family: 'Roboto';
+            font-size: 14px;
+            font-weight: 400;
+
+        }
+    }
+
+    .docDiv{
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #E7ECF3;
+        padding: 6px 30px;
+        p{
+            font-family: 'Roboto';
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 18px;
+
+        }
+
+        .docName{
+            p{
+                color: #092657;
+            }
+
+        }
+        .docDate{
+            display: inline-flex;
+            p{
+                color: #6E7D97;
+    
+            }
+
+            svg{
+                margin-left: 30px;
+                padding-top: 23px;
+            }
+        }
+    }
+}

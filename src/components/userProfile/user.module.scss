@@ -1,0 +1,230 @@
+.body {
+    background-color: #F8F9FD;
+    box-sizing: border-box;
+
+
+}
+
+.heading{
+    color: #092657;
+    font-weight: 500;
+    font-size: 24px;
+    margin: 30px;
+
+}
+
+.subHeading{
+    color: #092657;
+    font-weight: 500;
+    font-size: 18px;
+    padding: 20px;
+    margin: 0px !important;
+}
+section{
+    background-color: #fff;
+    margin: 0px 30px;
+    padding: 0;
+}
+
+.firstSectionWrapperDiv{
+    display: flex;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #E7ECF3;
+    padding: 0px 30px;
+
+    .saveChanges {
+        width: 300px;
+        height: 40px;
+        padding: 8px 16px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        border: 1px solid #ADB4CD;
+        display: block;
+        color: #fff;
+        background-color: #3C409E;
+        margin-top: 125px;
+    }
+
+    .profileImage{
+        display: flex;
+        padding-bottom: 30px;
+        width: 30%;
+
+        svg{
+        margin: 0;
+        }
+
+        .imageDiv{
+            margin-right: 30px;
+            width: 40%;
+
+            img{
+                width: 100%;
+            }
+
+            p{
+            color: #092657;
+            font-weight: 500;
+            font-size: 12px;
+            }
+     
+        }
+        .imageButtonDiv{
+            display: flex;
+            flex-direction: column;
+            padding-top: 30px;
+            margin-top: 10px;
+            width: 55%;
+
+           
+            
+            button {
+                width: 100%;
+                height: 40px;
+                padding: 8px 16px;
+                margin-bottom: 10px;
+                margin-top: 10px;
+                border-radius: 6px;
+                border: 1px solid #ADB4CD;
+                display: block;
+                
+               
+            }
+            .uploadBtn {
+                color: #fff;
+                background-color: #3C409E;
+
+            }
+            .removeBtn {
+                color:  #3C409E;
+                background-color: #ffffff;
+            }
+        }
+        
+    }
+
+}
+.profileInfoRight {
+    width: 40%;
+    margin-left: 30px;
+    margin-right: 20px;
+
+    .inputDiv{
+        margin-top: 20px;
+        display: flex;
+        text-align: left;
+        flex-direction: column;
+        label {
+            color: #092657;
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            padding-bottom: 5px;
+           
+        }
+    
+        input {
+            height: 18px;
+            width: 90%;
+            left: 0px;
+            top: 26px;
+            border-radius: 6px;
+            padding: 10px;
+            border: 2px solid #C1C7D1;
+            
+        }
+        input:hover {
+            border: 2px solid #5258DD;
+        }
+        input:active {
+            width: auto;   
+        }
+    
+        input:focus {
+            outline: 2px solid #3C409E;
+            min-width: 100px;
+        }
+        
+        
+      }
+
+}
+
+.secondSectionWrapperDiv{
+    display: flex;
+    padding-bottom: 30px !important;
+    padding: 0px 30px;
+
+
+    button {
+        width: 20%;
+        height: 40px;
+        padding: 8px 16px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        border: 1px solid #ADB4CD;
+        display: block;
+        color:  #ffffff;
+        background-color: #3C409E;;
+        margin-top: 40px;
+    }
+
+    .inputDiv{
+        margin-top: 20px;
+        display: flex;
+        text-align: left;
+        flex-direction: column;
+        margin-right: 30px;
+        width: 30%;
+       
+        label {
+            color: #092657;
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            padding-bottom: 5px;
+            
+        }
+    
+        input {
+            height: 18px;
+            width: 100%;
+            left: 0px;
+            top: 26px;
+            border-radius: 6px;
+            padding: 10px;
+            border: 2px solid #C1C7D1;
+            
+        }
+        input:hover {
+            border: 2px solid #5258DD;
+        }
+        input:active {
+            width: auto;   
+        }
+    
+        input:focus {
+            outline: 2px solid #3C409E;
+            min-width: 100px;
+        }
+        
+        
+        }
+    
+    
+
+}
+
+.error {
+    color : #DE3838;
+    padding: 5px 30px;
+}
+
+.success{
+    color : green;
+    padding: 5px 30px;
+}
+
+button {
+    cursor: pointer;
+}

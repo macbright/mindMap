@@ -1,0 +1,38 @@
+
+.rememberMe{
+    float: left;
+    color: #092657;
+    input{
+        background: #092657;
+    }
+
+}
+
+.forgetUpperDiv{
+    width: 355px;
+    display: inline-block;
+    text-align: left;
+    margin-top: 20px;
+   
+}
+
+.forgetPassword{
+    float: right;
+    color: #3C409E;
+
+}
+
+.clearFix{
+    clear: both;
+    margin-bottom: 20px;
+}
+
+.logo{
+    width: 100%;
+    position: relative;
+}
+.logoDiv{
+    position: relative;
+    bottom: -30%;
+    padding-top: 5%;
+}

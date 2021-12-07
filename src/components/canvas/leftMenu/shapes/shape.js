@@ -19,12 +19,15 @@ function getStyles(left, top, isDragging) {
     } ;
 }
 
-const Shape = ({url, id, checkDrag}) => {
+const Shape = ({url, id, name}) => {
+
+   
 
     const onDragStart = (event, nodeType) => {
         event.dataTransfer.setData('application/reactflow', nodeType);
         event.dataTransfer.effectAllowed = 'move';
         event.dataTransfer.setData('src', url) 
+        event.dataTransfer.setData('alt', name) 
         event.dataTransfer.setData('id', id) 
       };
 
@@ -35,7 +38,7 @@ const Shape = ({url, id, checkDrag}) => {
             src={`data:image/png;base64, ${url}`} 
             className={styles.image} 
             key={id}
-            onDragStart={(event) => onDragStart(event, "custom")} 
+            onDragStart={(event) => onDragStart(event, "customNode")} 
             
         />
         </div>

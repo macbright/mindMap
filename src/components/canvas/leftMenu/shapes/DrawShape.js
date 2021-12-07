@@ -9,10 +9,12 @@ import styles from './shapes.module.scss';
 
 
 
-const DrawShape = ({ src, left, top, handleDelete}) => {
+const DrawShape = ({ src, handleDelete, elements, name}) => {
 
-    console.log('left: ', left)
+  
     const [target, setTarget] = useState();
+    const [shapeName, setShapeName] = useState(name);
+
 
     const [helper] = useState(() => {
         return new MoveableHelper();
@@ -26,11 +28,16 @@ const DrawShape = ({ src, left, top, handleDelete}) => {
         setImageProp(false);
     }
 
+    const handleImageName = (e) => {
+        const val = e.target.value
+        console.log( 'element id ', name)
+        setShapeName(val)
+    }
+
     const handleContext = (e) => {
         e.preventDefault();
         console.log('right click')
-        setImageProp(!imageProp);
-        
+        setImageProp(!imageProp);     
     }
 
     const handleDoubleClick = (e) => {
@@ -46,8 +53,7 @@ const DrawShape = ({ src, left, top, handleDelete}) => {
                 onResize={helper.onResize}
                 onRotateStart={helper.onRotateStart}
                 onRotate={helper.onRotate}
-                className={styles.target}
-                
+                className={styles.target}     
         />
             <img 
             src={src}
@@ -59,7 +65,8 @@ const DrawShape = ({ src, left, top, handleDelete}) => {
             // className="target"
             dir="rtl"
          />
-            {imageProp && imageDialogue(left, top, handleDelete)}
+          <input className={styles.imageName} onChange={handleImageName} value={shapeName} />
+            {imageProp && imageDialogue( handleDelete)}
         </>
         
     )

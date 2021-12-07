@@ -32,3 +32,14 @@
     outline: none !important;
 }
 
+.imageName{
+    display: block;
+    border: none ;
+    background: none;
+
+}
+
+.imageName:focus{
+    border: none;
+    outline: none;
+}

@@ -1,12 +1,15 @@
 import React, {useState, useEffect, memo, useCallback, useRef} from 'react';
-import { useDrop } from "react-dnd";
-import {checkLeftNtop, checkImageId} from './hook';
-import ReactFlow, { addEdge, Controls, MiniMap, removeElements } from 'react-flow-renderer';
+import ReactFlow, { addEdge, Controls, MiniMap, removeElements, updateEdge } from 'react-flow-renderer';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getElements } from '../../../store/slice/canvasElement'
 
 
 import DrawShape from "../leftMenu/shapes/DrawShape"
 import CustomNode from './NodeHandle';
-import CustomEdge from './CustomEdge';
+import CustomEdge from './customEdge/CustomEdge';
+
+import { checkImageId} from './hook';
 
 
 
@@ -17,19 +20,29 @@ const edgeTypes = {
 };
 
 
-
 const CanvasBoard = ({ shapes }) => {
 
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [board, setBoard] = useState({})
+
   const [elements, setElements] = useState([]);
+
+  const [imageName, setImageName] = useState('')
 
   useEffect(() => {
     
     console.log('elements ', elements)
     console.log('board ', board)
+
   }, [elements]);
+
+  useEffect(() => {
+    
+    console.log('elements on name change ', elements)
+    
+
+  }, [imageName, setImageName]);
 
   const onElementsRemove = (elementsToRemove) =>
   setElements((els) => removeElements(elementsToRemove, els));
@@ -50,6 +63,7 @@ const CanvasBoard = ({ shapes }) => {
     const type = event.dataTransfer.getData('application/reactflow');
     const url = event.dataTransfer.getData('src');
     const id = event.dataTransfer.getData('id');
+    const name = event.dataTransfer.getData('alt')
     const position = reactFlowInstance.project({
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top,
@@ -59,21 +73,23 @@ const CanvasBoard = ({ shapes }) => {
       id: checkImageId(),
       type,
       position,
-      data: {label: <DrawShape  src={`data:image/png;base64, ${url}`}  />},
-      arrowHeadType: '',
+      data: {label: <DrawShape  src={`data:image/png;base64, ${url}`}  name={name} elements={elements} 
+      setElements={setElements}  name={name}/>},
+      connectable: true,
+      name: name,
     };
-
-     if (type === "custom" && !event.source )   moveShapes(id, newNode.id,  position.x, position.y)
-
-     if (type === "custom" && type !== undefined) setElements((es) => es.concat(newNode));
+    
+     if (type === "customNode" )   moveShapes(id, newNode.id,  position.x, position.y, newNode.name)
+     if ( type === "customNode"  ) setElements((es) => es.concat(newNode));
   };
 
 
 
-  const moveShapes = useCallback((id, imageId, left, top) => {
+  const moveShapes = useCallback((id, imageId, left, top, name) => {
     if(!shapes){
       return null;
     }
+
     const selectShape = shapes?.filter((shape) => id === shape.id)
     setBoard(prevState => ({
       ...prevState, 
@@ -81,7 +97,8 @@ const CanvasBoard = ({ shapes }) => {
         id: id,
         position: {x: left, y: top},
         type: "custom",
-        url: selectShape[0]?.content
+        url: selectShape[0]?.content,
+        name: name
       }
     }))
   }, [board]);
@@ -90,9 +107,25 @@ const CanvasBoard = ({ shapes }) => {
       yourType: CustomNode,
     };
     
+    const onEdgeUpdate = (oldEdge, newConnection) =>
+    setElements((els) => updateEdge(oldEdge, newConnection, els));
 
 
-    const onConnect = (params) => setElements(e => addEdge(params,e));
+    const onConnect = (params) => setElements((els) => {
+      const edge = {
+       ...params,
+       arrowHeadType: 'arrowclosed',
+       arrowHeadColor: "#000",
+       label: "new connection added",
+       style: {
+         stroke: '#000',
+         strokeWidth: 2,
+         color: '#000'
+       }
+      };
+      console.log('edge: ', edge, 'els: ', els)
+      return addEdge(edge, els);
+    });
 
     return(
       <div className={styles.main} ref={reactFlowWrapper} >
@@ -107,8 +140,10 @@ const CanvasBoard = ({ shapes }) => {
                   onDragOver={onDragOver}
                   connectionLineStyle={{stroke: "#000", strokeWidth: 3}}
                   // connectionLineType="bezier"
+                  onEdgeUpdate={onEdgeUpdate}
                   minZoom={0.2}
                   edgeTypes={edgeTypes}
+                  arrowHeadColor= "#8f92a2"
                   snapToGrid={true}
                   snapGrid={[16, 16]}
     
@@ -121,10 +156,7 @@ const CanvasBoard = ({ shapes }) => {
                       role={'Dustbin'}
                     >
                       <Controls />
-                      {/* <Background
-                        color="#888"
-                        gap={16}
-                        /> */}
+                  
                         <MiniMap 
                         nodeColor={n=>{
                             if(n.type === 'input') return 'blue';
@@ -133,6 +165,7 @@ const CanvasBoard = ({ shapes }) => {
                         }} />
                     
                   </ReactFlow>
+
 
         </div>
     )

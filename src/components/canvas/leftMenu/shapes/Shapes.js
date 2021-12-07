@@ -9,7 +9,7 @@ const Shapes = ({shapes}) => {
     const displayImage =   shapes?.map((shape, i) => (
       
         <div className={styles.divImage} key={shape.id}>
-            <Shape url={shape.content} id={shape.id}/>
+            <Shape url={shape.content} id={shape.id} name={shape.name}/>
         </div>
             
     ))

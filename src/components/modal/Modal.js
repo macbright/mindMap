@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import Modal from 'react-modal';
 
 import styles from './modal.module.scss'
@@ -21,10 +21,17 @@ const customStyles = {
 
 
 
-const SimpleModal = ({  setShowModal, showModal }) => {    
+const SimpleModal = ({  setShowModal, showModal, setDocumentName, documentName,  handleCreateDocument, error, setError}) => {    
     
     const handleCloseModal = () => {
         setShowModal(false);
+    }
+
+    console.log(error)
+    const handleInputChange = (e) => {
+      const val = e.target.value;
+      setDocumentName(val);
+      setError('')
     }
     
       return (
@@ -33,24 +40,25 @@ const SimpleModal = ({  setShowModal, showModal }) => {
                 isOpen={showModal}
                 contentLabel="onRequestClose Example"
                 onRequestClose={handleCloseModal}
-                // className={styles.modal}
                 style={customStyles}
-                // overlayClassName={styles.overlay}
                 contentLabel="Example Modal"
+                ariaHideApp={false}
                 >
                  <button className={styles.closeButton} onClick={handleCloseModal}>Close Modal</button>
                
                 <div className={styles.inputDiv}>
                     <h2> Create a new Document</h2>
-
+                    <span className={styles.error}> {error && error}</span>
                     <input
                         type="text"
                         name="document name"
-                        placeholder="enter the document name"
-                       
-                        
+                        placeholder="enter the document name" 
+                        value={documentName}
+                        onChange={handleInputChange}
+                        className={styles.inputError}
+
                     /> 
-                    <button className={styles.submit} onClick={handleCloseModal}>Create New</button>
+                    <button className={styles.submit} onClick={handleCreateDocument}>Create New</button>
                 </div>
                 
             </Modal>
@@ -59,4 +67,4 @@ const SimpleModal = ({  setShowModal, showModal }) => {
     
   }
 
-  export default SimpleModal;
+  export default memo(SimpleModal);

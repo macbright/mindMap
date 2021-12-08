@@ -20,7 +20,9 @@ const LeftMenu = () => {
 
     const [basicShapeToggle, setBasicShapeToggle] = useState(false);
     const [azureToggle, setAzureToggle] = useState(false);
+    const [continuationToken, setContinuationToken] = useState(null);
 
+    
     // useEffect(() => {
     //     const page = {
     //         pageSize: 2

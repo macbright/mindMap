@@ -9,7 +9,7 @@ import { ReactComponent as CanvasLogo } from '../../../assets/canvasLogo.svg';
 import styles from './menu.module.scss';
 
 
-const Menu = () => {
+const Menu = ({state}) => {
 
     const [toggle, setToggle] = useState(false)
 
@@ -24,21 +24,25 @@ const Menu = () => {
 
     return (
         <div className={styles.nav}>
-            <ul className={styles.menuItems}>
-                <li className={styles.logo}> <CanvasLogo />  </li>
-                <li>File</li>
-                <li>Edit</li>
-                <li>Select</li>
-                <li>View</li>
-                <li>Insert</li>
-                <li>Arrange</li>
-            </ul>
-            <div className={styles.navRight}>
-                <p onClick={handleExport}> Export</p>
-                <Export onClick={handleExport} />
-                { toggle && <ExportCanvas setToggle={cancelExport} /> }
+            <div className={styles.logo}> <CanvasLogo />  </div>
+               <div className={styles.menuDiv}> 
+                <div>
+                    <h3>{state.name }</h3>
+                    <ul className={styles.menuItems}>
+                        <li>File</li>
+                        <li>Edit</li>
+                        <li>Select</li>
+                        <li>View</li>
+                        <li>Insert</li>
+                        <li>Arrange</li>
+                    </ul>
+                </div>
+                <div className={styles.navRight}>
+                    <p onClick={handleExport}> Export</p>
+                    <Export onClick={handleExport} />
+                    { toggle && <ExportCanvas setToggle={cancelExport} /> }
+                </div>
             </div>
-
         </div>
     )
 }

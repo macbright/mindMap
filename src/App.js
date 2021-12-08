@@ -22,7 +22,7 @@ function App() {
         <Route exact path='/' element={<PrivateRoute/>}>
             <Route exact path='/recent-documents' element={<Main/>}/>
             <Route exact path='/user/:id' element={<Main/>}/>
-            <Route exact path='/draw' element={<MainCanvas />}/>
+            <Route exact path='/documents/:id' element={<MainCanvas />}/>
         </Route>
       </Routes>
     </div>

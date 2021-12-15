@@ -1,0 +1,82 @@
+
+.docDiv{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #E7ECF3;
+    padding: 6px 30px;
+    position: relative;
+    p{
+        font-family: 'Roboto';
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+
+    }
+
+    .docName{
+        cursor: pointer;
+        p{
+            color: #092657;
+            cursor: pointer;
+        }
+
+    }
+    .docDate{
+        display: inline-flex;
+        p{
+            color: #6E7D97;
+
+        }
+
+        svg{
+            margin-left: 30px;
+            padding-top: 23px;
+        }
+    }
+}
+
+.dotIcon{
+    margin-left: 60px !important;
+    cursor: pointer;
+}
+
+.dropDown{
+    width: 200px;
+    height: 130px;
+    background-color: #F8F9FD;
+    border-radius: 10px;
+    position: absolute;
+    right: 45px;
+    top: 38px;
+    z-index: 50;
+    color: #092657;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+
+
+    p{
+        cursor: pointer;
+    }
+    
+    .edit{
+        display: flex;
+        padding: 10px;
+        border-bottom: 1px solid #e5e7ec;
+
+        svg{
+            margin-right: 15px;
+            margin-top: 13px;
+
+        }
+    }
+
+    .delete{
+        display: flex;
+        padding: 10px;
+
+        svg{
+            margin-right: 15px;
+            margin-top: 13px;
+        }
+
+    }
+}

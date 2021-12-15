@@ -1,15 +1,25 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import { ReactComponent as DropDown } from '../../../assets/dropDown.svg';
 import { ReactComponent as Hamburger } from '../../../assets/hamburger.svg';
 import { ReactComponent as Box } from '../../../assets/box.svg';
-import { ReactComponent as Dots } from '../../../assets/dots.svg';
-import list from "../documentList/documentList";
+import Document from '../document/Document';
+
+
+import {useGetAllUsersDocumentsQuery} from '../../../store/services/document';
 
 import styles from "./body.module.scss";
 
 const Body = () => {
   
+    const { data, isLoading } = useGetAllUsersDocumentsQuery();
+
+    useEffect(() => {
+        console.log('data: ', data)
+    }, [data])
+
+   
+    
   return (
    <div >
        <div className={styles.heading}>
@@ -30,17 +40,9 @@ const Body = () => {
                <p> Name</p>
            </div>
            {
-                 list.map((document) =>
+                 data?.$values.map((document) =>
                  (
-                     <div  key={document.id} className={styles.docDiv}>
-                        <div className={styles.docName}>
-                            <p> {document.name}</p>
-                        </div>
-                        <div className={styles.docDate}>
-                            <p>{document.dateCreated} </p>
-                            <Dots />
-                        </div>
-                     </div>     
+                    <Document  document={document} key={document.id}/>
                  )
 
              )

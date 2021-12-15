@@ -68,3 +68,22 @@
     }
 
 }
+
+.saving{
+
+    display: inline;
+    color: gainsboro;
+    height: 22px;
+    
+}
+
+.saveIcon{
+    display: flex;
+
+    span{
+        margin-left: 8px;
+        margin-bottom: 10px !important;
+        margin-top: 3px;
+        font-weight: bold;
+    }
+}

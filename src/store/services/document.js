@@ -25,9 +25,89 @@ export const documentApi = createApi({
         }),
         providesTags: ["Document"]
     }),
-    
+    saveDocumentShapes: builder.mutation({
+        query: ({payload, documentId}) => ({
+        url: `/api/documentShape/${documentId}/multiple`,
+        headers: {
+          Authorization: `Bearer ${getJwtToken()}`
+        },
+        method: 'POST',
+        body: payload
+        }),
+        providesTags: ["Document"]
+    }),
+    saveDocumentShapesRelation: builder.mutation({
+        query: ({payload, documentId}) => ({
+        url: `/api/shapeRelation/${documentId}/multiple`,
+        headers: {
+          Authorization: `Bearer ${getJwtToken()}`
+        },
+        method: 'POST',
+        body: payload
+        }),
+        providesTags: ["Document"]
+    }),
+    getDocumentById: builder.query({
+      query: (documentId) => ({
+      url: `/api/document/${getUserId()}/${documentId}`,
+      headers: {
+        Authorization: `Bearer ${getJwtToken()}`
+      },
+      method: 'GET',
+
+      }),
+      providesTags: ["Document"]
+  }),
+  getAllUsersDocuments: builder.query({
+    query: () => ({
+    url: `/api/document/${getUserId()}/all`,
+    headers: {
+      Authorization: `Bearer ${getJwtToken()}`
+    },
+    method: 'GET',
+
+    }),
+    providesTags: ["Document"]
+  }),
+  deleteDocument: builder.mutation({
+    query: (id) => ({
+    url: `/api/document/${getUserId()}/${id}`,
+    headers: {
+      Authorization: `Bearer ${getJwtToken()}`
+    },
+    method: 'DELETE',
+    }),
+    invalidatesTags: ["Document"]
+  }),
+  changeDocumentName: builder.mutation({
+    query: ({payload, id}) => ({
+    url: `/api/document/${getUserId()}/${id}`,
+    headers: {
+      Authorization: `Bearer ${getJwtToken()}`
+    },
+    method: 'PUT',
+    body: payload
+    }),
+    invalidatesTags: ["Document"]
+  }),
+  exportToJson: builder.query({
+    query: (id) => ({
+    url: `/api/${id}/export/json`,
+    headers: {
+      Authorization: `Bearer ${getJwtToken()}`
+    },
+    method: 'GET',
+    }),
+  }),
   })
 });
 
-export const { useCreateDocumentMutation } = documentApi;
+export const { useCreateDocumentMutation,  useSaveDocumentShapesMutation, 
+  useSaveDocumentShapesRelationMutation, useGetDocumentByIdQuery,  
+  useGetAllUsersDocumentsQuery, 
+  useDeleteDocumentMutation,
+  useChangeDocumentNameMutation,
+  useExportToJsonQuery,
+} = documentApi;
+
 

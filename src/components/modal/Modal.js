@@ -41,7 +41,7 @@ const SimpleModal = ({  setShowModal, showModal, setDocumentName, documentName, 
                 contentLabel="onRequestClose Example"
                 onRequestClose={handleCloseModal}
                 style={customStyles}
-                contentLabel="Example Modal"
+
                 ariaHideApp={false}
                 >
                  <button className={styles.closeButton} onClick={handleCloseModal}>Close Modal</button>

@@ -1,15 +1,18 @@
 import React, {useState, useEffect, memo, useCallback, useRef} from 'react';
 import ReactFlow, { addEdge, Controls, MiniMap, removeElements, updateEdge } from 'react-flow-renderer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useParams} from "react-router-dom";
 
-import { getElements } from '../../../store/slice/canvasElement'
 
-
+import { useSaveDocumentShapesMutation, 
+  useSaveDocumentShapesRelationMutation, useGetDocumentByIdQuery} from '../../../store/services/document';
 import DrawShape from "../leftMenu/shapes/DrawShape"
 import CustomNode from './NodeHandle';
 import CustomEdge from './customEdge/CustomEdge';
+import {savingElements, savedElements } from '../../../store/slice/canvasElement';
 
-import { checkImageId} from './hook';
+
+import { checkImageId, saveShapesRelations, saveShapes, getShapesAndRelations} from './hook';
 
 
 
@@ -20,29 +23,50 @@ const edgeTypes = {
 };
 
 
-const CanvasBoard = ({ shapes }) => {
-
+const CanvasBoard = () => {
+  const {id } = useParams();
+  const dispatch = useDispatch();
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  const [board, setBoard] = useState({})
+  const [saveDocumentShapes, { isLoading: shapeSaving, isSuccess: shapesSuccess }] = useSaveDocumentShapesMutation();
+  const [saveDocumentShapesRelation, { isLoading: relationsSaving, isSuccess: relationSuccess }] = useSaveDocumentShapesRelationMutation();
+  const { data, isLoading } = useGetDocumentByIdQuery(id);
+  // const [board, setBoard] = useState({})
 
   const [elements, setElements] = useState([]);
 
   const [imageName, setImageName] = useState('')
 
   useEffect(() => {
-    
-    console.log('elements ', elements)
-    console.log('board ', board)
+    const newElements = {
+      payload: {
+        "DocumentShapes" :  saveShapes(elements),
+      },
+      documentId: id
+    }
+    const newRelations = {
+      payload: {
+        "Relations" :  saveShapesRelations((elements)),
+      },
+      documentId: id
+    }
+    console.log(newRelations, newElements)
+    if(saveShapes(elements).length > 0) saveDocumentShapes(newElements);
+    if(saveShapesRelations(elements).length > 0) saveDocumentShapesRelation(newRelations)
 
-  }, [elements]);
+  }, [elements, setElements]);
 
   useEffect(() => {
-    
-    console.log('elements on name change ', elements)
-    
+    if(data) console.log('datass: ', getShapesAndRelations(data, DrawShape))
+    if(data) setElements(getShapesAndRelations(data, DrawShape))
+  }, [data])
 
-  }, [imageName, setImageName]);
+
+  useEffect(() => {
+    dispatch(savingElements(shapeSaving | relationsSaving ))
+    dispatch(savedElements(shapesSuccess | relationSuccess))
+  }, [shapeSaving, relationsSaving, shapesSuccess, relationSuccess])
+
 
   const onElementsRemove = (elementsToRemove) =>
   setElements((els) => removeElements(elementsToRemove, els));
@@ -53,9 +77,9 @@ const CanvasBoard = ({ shapes }) => {
   const onDragOver = (event) => {
       event.stopPropagation();
       event.preventDefault();
+     
       event.dataTransfer.dropEffect = 'move';
   };
-
     
   const onDrop = (event) => {
     event.preventDefault();
@@ -73,35 +97,13 @@ const CanvasBoard = ({ shapes }) => {
       id: checkImageId(),
       type,
       position,
-      data: {label: <DrawShape  src={`data:image/png;base64, ${url}`}  name={name} elements={elements} 
-      setElements={setElements}  name={name}/>},
+      data: {label: <DrawShape  src={`data:image/png;base64, ${url}`}    name={name}/>},
+      imageId: id,
       connectable: true,
       name: name,
     };
-    
-     if (type === "customNode" )   moveShapes(id, newNode.id,  position.x, position.y, newNode.name)
      if ( type === "customNode"  ) setElements((es) => es.concat(newNode));
   };
-
-
-
-  const moveShapes = useCallback((id, imageId, left, top, name) => {
-    if(!shapes){
-      return null;
-    }
-
-    const selectShape = shapes?.filter((shape) => id === shape.id)
-    setBoard(prevState => ({
-      ...prevState, 
-      [imageId]: {
-        id: id,
-        position: {x: left, y: top},
-        type: "custom",
-        url: selectShape[0]?.content,
-        name: name
-      }
-    }))
-  }, [board]);
 
     const NODE_TYPES = {
       yourType: CustomNode,
@@ -123,7 +125,6 @@ const CanvasBoard = ({ shapes }) => {
          color: '#000'
        }
       };
-      console.log('edge: ', edge, 'els: ', els)
       return addEdge(edge, els);
     });
 
@@ -146,8 +147,6 @@ const CanvasBoard = ({ shapes }) => {
                   arrowHeadColor= "#8f92a2"
                   snapToGrid={true}
                   snapGrid={[16, 16]}
-    
-
                     style={{
                         width: "80vw",
                         height: "85vh",
@@ -162,11 +161,8 @@ const CanvasBoard = ({ shapes }) => {
                             if(n.type === 'input') return 'blue';
                             
                             return '#FFCC00'
-                        }} />
-                    
+                        }} />               
                   </ReactFlow>
-
-
         </div>
     )
 }

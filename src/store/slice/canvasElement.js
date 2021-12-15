@@ -4,17 +4,23 @@ import { createSlice } from '@reduxjs/toolkit';
 export const canvasElementsSlice = createSlice({
   name: 'canvasElements',
   initialState: {
-      elements: []
+      elements: {
+        isSaving: null,
+        saved: null
+      }
   },
   reducers: {
-    addElement: (state, action) => {
-      state.elements.push(action.payload) ;
+    savingElements: (state, action) => {
+      state.elements.isSaving = action.payload;
+    },
+    savedElements: (state, action) => {
+      state.elements.saved = action.payload;
     },
   },
   
 });
 
-export const {addElement } = canvasElementsSlice.actions
+export const {savingElements, savedElements } = canvasElementsSlice.actions
 
-export const getElements = (state) => state[canvasElementsSlice.name].elements;
+export const saveStatus = (state) => state[canvasElementsSlice.name].elements;
 

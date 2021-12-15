@@ -96,7 +96,7 @@ const Login = () => {
 
                 <button  type="submit" className={styles.createBtn}> Sign in </button>
             </form>
-            <div className={moreStyles.logoDiv}> <Logo  className={styles.logo, moreStyles.logo}/> </div>
+            <div className={moreStyles.logoDiv}> <Logo  className={`${styles.logo}, ${moreStyles.logo}`}/> </div>
         </div>
         
        </div>

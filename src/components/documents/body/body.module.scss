@@ -45,6 +45,8 @@
 .docView{
     background-color: #ffffff;
     margin: 5px 30px 50px 30px;
+    overflow-y: scroll;
+    height: 65vh;
 
     .docHeading{
         padding: 4px 30px;
@@ -59,36 +61,11 @@
         }
     }
 
-    .docDiv{
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid #E7ECF3;
-        padding: 6px 30px;
-        p{
-            font-family: 'Roboto';
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 18px;
-
-        }
-
-        .docName{
-            p{
-                color: #092657;
-            }
-
-        }
-        .docDate{
-            display: inline-flex;
-            p{
-                color: #6E7D97;
     
-            }
+    
+}
 
-            svg{
-                margin-left: 30px;
-                padding-top: 23px;
-            }
-        }
-    }
+.dotIcon{
+    margin-left: 60px !important;
+    cursor: pointer;
 }

@@ -26,6 +26,13 @@ const Menu = () => {
       navigate('/recent-documents');
     }
   }, [userInfo])
+
+  useEffect(() => {
+    setTimeout(()=> {
+      handleLogout();
+      }, 6000000 );
+  })
+
   
   const handleLogout = () => {
     localStorage.clear();
@@ -72,7 +79,7 @@ const Menu = () => {
          <p> {data?.userName} </p>
          <span> {data?.email}</span>
        </div>
-       <DropDown  className={styles.alignVer, styles.dropDown} onClick={handleClick}/>
+       <DropDown  className={`${styles.alignVer}, ${styles.dropDown}`} onClick={handleClick}/>
        { toggle && displayDropDown() }
      </div>
      <div className={styles.clearFix }></div>

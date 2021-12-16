@@ -2,7 +2,8 @@
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { getJwtToken, getUserId} from "../hooks";
+
+import { getJwtToken, getUserId, axiosBaseQuery} from "../hooks";
 
 const baseUrl = "https://waprojjourneyapi.azurewebsites.net/";
 
@@ -90,7 +91,7 @@ export const documentApi = createApi({
     }),
     invalidatesTags: ["Document"]
   }),
-  exportToJson: builder.query({
+  exportingToJson: builder.query({
     query: (id) => ({
     url: `/api/${id}/export/json`,
     headers: {
@@ -98,6 +99,7 @@ export const documentApi = createApi({
     },
     method: 'GET',
     }),
+    providesTags: ["Document"]
   }),
   })
 });
@@ -107,7 +109,7 @@ export const { useCreateDocumentMutation,  useSaveDocumentShapesMutation,
   useGetAllUsersDocumentsQuery, 
   useDeleteDocumentMutation,
   useChangeDocumentNameMutation,
-  useExportToJsonQuery,
+  useExportingToJsonQuery,
 } = documentApi;
 
 

@@ -12,17 +12,14 @@ export const shapesApi = createApi({
   }),
   tagTypes: ["Shape"],
   endpoints: (builder) => ({
-    getShapes: builder.query({
-        query: () => ({
+    getShapes: builder.mutation({
+        query: (payload) => ({
         url: `/api/shape/all`,
         headers: {
           Authorization: `Bearer ${getJwtToken()}`
         },
         method: 'POST',
-        body: {
-            pageSize: 25,
-            continuationToken: null,
-        }
+        body: payload
         }),
         providesTags: ["Shape"]
     }),
@@ -30,5 +27,5 @@ export const shapesApi = createApi({
   })
 });
 
-export const { useGetShapesQuery } = shapesApi;
+export const { useGetShapesMutation } = shapesApi;
 

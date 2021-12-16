@@ -2,6 +2,8 @@
 
 .main{
     display: flex;
+    font-family: 'Roboto' !important;
+
 
     .leftMenu{
         height: calc(100vh - 50px);
@@ -55,7 +57,10 @@
         }
 
     }
-
-
    
+}
+
+.loading{
+    text-align: center;
+    margin-top: 15px;
 }

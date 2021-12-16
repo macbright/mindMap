@@ -2,6 +2,8 @@
     display: flex;
     height:  60px;
     border-bottom: 1px solid #E7E7E7;
+    font-family: 'Roboto' !important;
+
 
 
     .menuDiv{
@@ -35,6 +37,8 @@
 
     .menuItems{
         display: flex;
+        font-family: 'Roboto' !important;
+
 
         li{
            margin: 0px 10px; 
@@ -79,6 +83,8 @@
 
 .saveIcon{
     display: flex;
+    font-family: 'Roboto' !important;
+
 
     span{
         margin-left: 8px;

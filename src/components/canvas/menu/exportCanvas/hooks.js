@@ -15,3 +15,17 @@ export const downloadFile = ({ data, fileName, fileType }) => {
     a.remove()
   }
 
+export const escapeString = (data) => {
+  const newData = []
+   data.forEach((ele) => {
+    let newEle = {
+      JSONOutput: decodeURIComponent(encodeURIComponent(ele.JSONOutput)),
+      ShapeId: ele.ShapeId,
+      ShapeName: ele.ShapeName,
+    }
+    newData.push(newEle)
+    
+  })
+  return newData;
+}
+

@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: center;
     justify-content: center;
+    font-family: 'Roboto' !important;
 
     button {
         background: none; 
@@ -38,12 +39,6 @@
     }
 }
 
-.saving{
-    position: absolute;
-    top: 0;
-    color: gainsboro;
-    height: 20px;
-}
 
 // .edges{
 //     stroke: #000 !important;

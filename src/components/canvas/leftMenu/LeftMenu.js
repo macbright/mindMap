@@ -1,5 +1,6 @@
-import React, {useState, memo, useMemo} from 'react';
+import React, {useState, memo, useEffect} from 'react';
 import {ReactFlowProvider} from 'react-flow-renderer';
+import LoaderSpinner from 'react-loader-spinner';
 
 
 import { ReactComponent as SideArrow } from '../../../assets/sideArrow.svg';
@@ -8,25 +9,45 @@ import { ReactComponent as ArrowDown } from '../../../assets/arrowDown.svg';
 import CanvasBoard from '../canvasBoard/CanvasBoard';
 import Shapes from './shapes/Shapes';
 
-import {useGetShapesQuery} from "../../../store/services/shapes";
+import {useGetShapesMutation} from "../../../store/services/shapes";
 
 import styles from './leftMenu.module.scss';
 
 const LeftMenu = () => {
 
-    const { data = {}, isFetching: isLoadingList } = useGetShapesQuery()
+    const [getShapes, { data: response, isLoading}] = useGetShapesMutation()
 
     const [basicShapeToggle, setBasicShapeToggle] = useState(false);
     const [azureToggle, setAzureToggle] = useState(false);
+    const [data, setData] = useState([]);
     const [continuationToken, setContinuationToken] = useState(null);
 
     
-    // useEffect(() => {
-    //     const page = {
-    //         pageSize: 2
-    //     }
-    //     console.log('data: ', data)
-    // },[data])
+    useEffect(() => {
+        const payload = {
+            pageSize: 25,
+            continuationToken: continuationToken,
+        }
+        getShapes(payload)
+    },[])
+
+    useEffect(() => {
+        setContinuationToken(response?.continuationToken)
+        if(response) setData([...data, ...response.shapes.$values])
+    },[response])
+
+    useEffect(() => {
+        console.log('data: ss', data)
+        recallShapes();
+    },[continuationToken])
+
+    const recallShapes = () => {
+        const payload = {
+            pageSize: 25,
+            continuationToken: continuationToken,
+        }
+        if(continuationToken) getShapes(payload)
+    }
 
     return (
     <ReactFlowProvider>
@@ -53,7 +74,15 @@ const LeftMenu = () => {
                 {!azureToggle && < SideArrow onClick={() => setAzureToggle(!azureToggle)}/>}
                 {azureToggle && < ArrowDown onClick={() => setAzureToggle(!azureToggle)} />}
             </div>
-            {azureToggle && data.shapes && < Shapes shapes={data?.shapes.$values} />}
+            {azureToggle && data.length > 0 && < Shapes shapes={data} />}
+            { azureToggle && <LoaderSpinner
+                visible={isLoading}
+                type="Oval"
+                color="#00664f"
+                width={25}
+                height={25}
+                className={styles.loading}
+            />}
 
         </div>
         <CanvasBoard  />

@@ -49,7 +49,7 @@ export const saveShapes = (elements) => {
       let shape = {
         "DocumentShapeId": element.id,
         "ShapeId": element.imageId,
-        "Name": element.name,
+        "Name": element.id,
         "PositionX": element.position.x,
         "PositionY": element.position.y, 
         "width": 50,

@@ -1,26 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, memo} from 'react';
 import { useParams} from "react-router-dom";
 
 import { ReactComponent as ExportJson } from '../../../../assets/exportJson.svg';
+import { ReactComponent as ExportPdf } from '../../../../assets/pdf.svg';
 import { ReactComponent as Cancel } from '../../../../assets/cancel.svg';
 
 import styles from './exportCanvas.module.scss';
 
-import { useExportToJsonQuery } from '../../../../store/services/document';
-import { downloadFile } from './hooks';
+import { useExportingToJsonQuery } from '../../../../store/services/document';
+import { downloadFile, escapeString } from './hooks';
 
 
 
 const ExportCanvas = ({setToggle}) => {
     const {id} = useParams();
 
-    const {data, error} = useExportToJsonQuery(id);
+    const { data = [], error, isLoading } = useExportingToJsonQuery(id);
+    // const [data, setData] = useState(null)
     const [exportType, setExportType] = useState('json');
 
     const handleChange = (e) => {
         const val = e.target.value
         setExportType(val)
     }
+
+      
+     
+
+    useEffect(() => {
+        
+        if(data.length > 0) console.log('dataaaaa: ', escapeString(data))
+    }, [data])
 
     const handleCancelExport = () => {
         setToggle();
@@ -29,14 +39,15 @@ const ExportCanvas = ({setToggle}) => {
     const  downloadJson = (data) => {
         downloadFile({
           data: JSON.stringify(data),
-          fileName: `${data?.Name}`,
+          fileName: `${data[0].ShapeId}`,
           fileType: 'text/json',
         })
       }
     
 
     const handleExportCanvas = (e) => {
-        if(data) downloadJson(data);
+        e.preventDefault();
+        if(data) downloadJson(escapeString(data));
         setToggle();
     }
 
@@ -63,7 +74,7 @@ const ExportCanvas = ({setToggle}) => {
                       <label for="pdf"> PDF</label>
                       <span> Canvas will export as PDF file.</span>
                   </div>
-                  < ExportJson />
+                  < ExportPdf />
               </div>
               <div className={styles.buttonDiv}>
                   <button onClick={handleExportCanvas}> Continue </button>

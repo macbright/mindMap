@@ -1,5 +1,6 @@
-import React, {useState, useEffect, memo} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useParams} from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { ReactComponent as ExportJson } from '../../../../assets/exportJson.svg';
 import { ReactComponent as ExportPdf } from '../../../../assets/pdf.svg';
@@ -10,13 +11,12 @@ import styles from './exportCanvas.module.scss';
 import { useExportingToJsonQuery } from '../../../../store/services/document';
 import { downloadFile, escapeString } from './hooks';
 
-
+           /*eslint-disable */
 
 const ExportCanvas = ({setToggle}) => {
     const {id} = useParams();
 
-    const { data = [], error, isLoading } = useExportingToJsonQuery(id);
-    // const [data, setData] = useState(null)
+    const { data = [] } = useExportingToJsonQuery(id);
     const [exportType, setExportType] = useState('json');
 
     const handleChange = (e) => {
@@ -25,7 +25,6 @@ const ExportCanvas = ({setToggle}) => {
     }
 
       
-     
 
     useEffect(() => {
         
@@ -63,7 +62,7 @@ const ExportCanvas = ({setToggle}) => {
                       <input type="radio" name="exportCanvas" id="json" value="json" checked 
                       onChange={handleChange}
                       />
-                      <label for="json"> JSON</label>
+                      <label htmlFor="json"> JSON</label>
                       <span> Canvas will export as JSON file.</span>
                   </div>
                   < ExportJson />
@@ -71,7 +70,7 @@ const ExportCanvas = ({setToggle}) => {
               <div className={styles.pdfDiv}>
                   <div className={styles.inputDiv}>
                       <input type="radio" name="exportCanvas" id="pdf" value="pdf" onChange={handleChange}/>
-                      <label for="pdf"> PDF</label>
+                      <label htmlFor="pdf"> PDF</label>
                       <span> Canvas will export as PDF file.</span>
                   </div>
                   < ExportPdf />
@@ -83,5 +82,9 @@ const ExportCanvas = ({setToggle}) => {
         </div>
       )
 }
+
+ExportCanvas.propTypes = {
+    setToggle: PropTypes.func,
+};
 
 export default ExportCanvas;

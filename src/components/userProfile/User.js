@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
-import { set, useForm } from 'react-hook-form';
+import {  useForm } from 'react-hook-form';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -24,14 +24,14 @@ const User = () => {
     const avatarData = new FormData();
     const inputFile = useRef('');
 
-    const { data, isLoading } = useGetUserInfo();
+    const { data } = useGetUserInfo();
     const [changePassword, {  error: passwordError, isSuccess: passwordSuccess }] = useChangePasswordMutation();
     const [updateUser, {  error: userUpdateError, isSuccess: userUpdateSuccess }] = useUpdateUserMutation();
-    const [changeUserAvatar, {  error: avatarUpdateError, isSuccess: avatarUpdateSuccess }] = useChangeUserAvatarMutation();
+    const [changeUserAvatar, {  isSuccess: avatarUpdateSuccess }] = useChangeUserAvatarMutation();
 
     const [avatar, setAvatar] = useState('');
 
-    const { register, reset, handleSubmit, formState: { errors }, } = useForm({
+    const { register, reset, handleSubmit, } = useForm({
         resolver: yupResolver(schema)
     })
 
@@ -41,10 +41,6 @@ const User = () => {
         location: data.location || 'Chicago'
     })
   }, [data])
-
-//   useEffect(() => {
-//         // console.log('user avatar: ', userAvatar)
-//   }, [userAvatar, avatarUpdateSuccess])
 
   const handleAvatarChange = (result) => {
     setAvatar(result.target.files[0])

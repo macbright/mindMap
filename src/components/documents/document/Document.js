@@ -1,7 +1,7 @@
 import React, {memo, useState, useRef, useEffect} from 'react';
 import {  useNavigate } from "react-router-dom";
-import onClickOutside from "react-onclickoutside";
 import { ToastContainer, toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 import DocumentModal from './modal/DocumentModal';
 import {useChangeDocumentNameMutation, useDeleteDocumentMutation} from '../../../store/services/document';
@@ -11,12 +11,12 @@ import { ReactComponent as EditIcon } from '../../../assets/edit.svg';
 import { ReactComponent as DeleteIcon } from '../../../assets/delete.svg';
 
 import styles from "./document.module.scss";
-import { set } from 'react-hook-form';
+
 
 const Document = ({document}) => { 
     
-    const [changeDocumentName, { data: ChangeData, error: changeError, isSuccess: changeSuccess }] = useChangeDocumentNameMutation();
-    const [deleteDocument, {  data: deleteData, error: deleteError, isSuccess: deleteSuccess }] = useDeleteDocumentMutation();
+    const [changeDocumentName, {  isSuccess: changeSuccess }] = useChangeDocumentNameMutation();
+    const [deleteDocument, {   isSuccess: deleteSuccess }] = useDeleteDocumentMutation();
     const navigate = useNavigate();
 
     const menuRef = useRef(null);
@@ -59,18 +59,18 @@ const Document = ({document}) => {
         setShowModal(!showModal)
       }
 
-     const handleClick = (e) => {
+     const handleClick = () => {
          setDropDown(!dropDown)
      }
-     const handleCancel = (e) => {
+     const handleCancel = () => {
         setDropDown(false)
         setShowModal(false)
     }
-    const handleDeleteDocument = (e) => {
+    const handleDeleteDocument = () => {
         deleteDocument(document.id)
         setShowModal(false);      
     }
-    const handleRenameDocument = (e) => {
+    const handleRenameDocument = () => {
         const newName = {
             payload: {
                 "Name" :  documentName,
@@ -81,7 +81,7 @@ const Document = ({document}) => {
         setShowModal(false);
     }
  
-    const handleNameClick = (e) => {
+    const handleNameClick = () => {
         navigate(`/documents/${document.id}`, { state: document})
     }
 
@@ -110,4 +110,7 @@ const Document = ({document}) => {
     )
 }
 
+Document.propTypes = {
+    document: PropTypes.object
+};
 export default memo(Document);

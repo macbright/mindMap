@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import ExportCanvas from './exportCanvas/ExportCanvas';
 import { ReactComponent as Export } from '../../../assets/export.svg';
@@ -55,5 +56,8 @@ const Menu = ({state}) => {
         </div>
     )
 }
+Menu.propTypes = {
+    state: PropTypes.object
+};
 
 export default Menu;

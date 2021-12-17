@@ -1,17 +1,7 @@
-import React, { memo, useRef, useState, FC, useLayoutEffect } from 'react';
+import React, { memo, useRef, useState, useLayoutEffect } from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
-// import styled from 'styled-components';
-// import { getEdgeStart } from '../helpers/getEdgeStart';
 
-// const Label = styled.text`
-//   fill: white;
-//   font-weight: 700;
-// `;
-
-// const TextRect = styled.rect`
-//   fill: ${(props) => props.backgroundColor};
-//   color: #fff;
-// `;
 
 const EdgeText = ({
   label,
@@ -21,13 +11,6 @@ const EdgeText = ({
   children,
   className,
   backgroundColor = '#8f92a2',
-  sourceX,
-  sourceY,
-  targetX,
-  targetY,
-  sourcePosition,
-  targetPosition,
-  position,
   ...rest
 }) => {
   const edgeRef = useRef(null);
@@ -52,7 +35,7 @@ const EdgeText = ({
     return null;
   }
 
-  const handleClick = (event) => {
+  const handleClick = () => {
       console.log('handle clicked')
   }
 
@@ -82,4 +65,19 @@ const EdgeText = ({
     </g>
   );
 };
+
+
+EdgeText.propTypes = {
+    data: PropTypes.object,
+    labelShowBg: PropTypes.bool,
+    arrowHeadType: PropTypes.string,
+    label: PropTypes.string,
+    labelBgPadding: PropTypes.array,
+    labelBgBorderRadius: PropTypes.number,
+    children: PropTypes.object,
+    className: PropTypes.string,
+    backgroundColor: PropTypes.string,
+
+};
+
 export default memo(EdgeText);

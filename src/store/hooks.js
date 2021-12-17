@@ -1,3 +1,4 @@
+import axios from 'axios';
 
 export const getUserId = () => {
     return localStorage.getItem('userId');

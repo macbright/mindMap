@@ -1,7 +1,7 @@
 
-import React, { useState, memo } from 'react';
+import React, {  memo } from 'react';
 import Modal from 'react-modal';
-
+import PropTypes from 'prop-types';
 import { ReactComponent as TrashIcon } from '../../../../assets/trash.svg';
 
 import styles from './documentModal.module.scss';
@@ -33,8 +33,7 @@ const DocumentModal = ({
     handleRenameDocument,
     handleCancel,
     eventName,
-    error,
-    setError 
+    error, 
     }) => {    
     
     const handleCloseModal = () => {
@@ -89,4 +88,15 @@ const DocumentModal = ({
     
   }
 
+  DocumentModal.propTypes = {
+    setShowModal: PropTypes.func, 
+    showModal: PropTypes.bool, 
+    documentName: PropTypes.string,
+    setDocumentName: PropTypes.func,  
+    handleDeleteDocument: PropTypes.func,
+    handleRenameDocument: PropTypes.func,
+    handleCancel: PropTypes.func,
+    eventName: PropTypes.string,
+    error: PropTypes.string, 
+};
   export default memo(DocumentModal);

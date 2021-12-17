@@ -1,4 +1,4 @@
-import React, {useState, useEffect, memo, useCallback, useRef} from 'react';
+import React, {useState, useEffect, memo, useRef} from 'react';
 import ReactFlow, { addEdge, Controls, MiniMap, removeElements, updateEdge } from 'react-flow-renderer';
 import { useDispatch } from 'react-redux';
 import { useParams} from "react-router-dom";
@@ -30,12 +30,10 @@ const CanvasBoard = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [saveDocumentShapes, { isLoading: shapeSaving, isSuccess: shapesSuccess }] = useSaveDocumentShapesMutation();
   const [saveDocumentShapesRelation, { isLoading: relationsSaving, isSuccess: relationSuccess }] = useSaveDocumentShapesRelationMutation();
-  const { data, isLoading } = useGetDocumentByIdQuery(id);
-  // const [board, setBoard] = useState({})
+  const { data } = useGetDocumentByIdQuery(id);
 
   const [elements, setElements] = useState([]);
 
-  const [imageName, setImageName] = useState('')
 
   useEffect(() => {
     const newElements = {

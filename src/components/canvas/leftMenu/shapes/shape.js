@@ -1,23 +1,8 @@
-import React, {memo, useEffect} from 'react';
-import { useDrag } from 'react-dnd';
-import { getEmptyImage } from 'react-dnd-html5-backend';
-
-
-
+import React, {memo} from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './shapes.module.scss';
 
-function getStyles(left, top, isDragging) {
-    const transform = `translate3d(${left}px, ${top}px, 0)` ;
-    return {
-        position: 'absolute',
-        transform ,
-        WebkitTransform: transform,
-        opacity: isDragging ? 0 : 1,
-        height: isDragging ? 0 : '',
-        zIndex: 150,
-    } ;
-}
 
 const Shape = ({url, id, name}) => {
 
@@ -46,4 +31,9 @@ const Shape = ({url, id, name}) => {
     )
 }
 
+Shape.propTypes = {
+    url: PropTypes.string,
+    id: PropTypes.string,
+    name: PropTypes.string,
+};
 export default memo(Shape);

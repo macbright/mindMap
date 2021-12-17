@@ -3,7 +3,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
-import { getJwtToken, getUserId, axiosBaseQuery} from "../hooks";
+import { getJwtToken, getUserId} from "../hooks";
 
 const baseUrl = "https://waprojjourneyapi.azurewebsites.net/";
 

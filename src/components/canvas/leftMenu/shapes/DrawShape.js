@@ -1,5 +1,6 @@
-import React, {memo, useEffect, useState} from 'react';
+import React, {memo, useState} from 'react';
 import Moveable from "react-moveable";
+import PropTypes from 'prop-types';
 
 import MoveableHelper from "moveable-helper";
 
@@ -9,7 +10,7 @@ import styles from './shapes.module.scss';
 
 
 
-const DrawShape = ({ src, handleDelete, elements, name}) => {
+const DrawShape = ({ src, handleDelete, name}) => {
 
   
     const [target, setTarget] = useState();
@@ -40,7 +41,7 @@ const DrawShape = ({ src, handleDelete, elements, name}) => {
         setImageProp(!imageProp);     
     }
 
-    const handleDoubleClick = (e) => {
+    const handleDoubleClick = () => {
         setTarget("");
     }
     return (
@@ -72,4 +73,9 @@ const DrawShape = ({ src, handleDelete, elements, name}) => {
     )
 }
 
+DrawShape.propTypes = {
+    src: PropTypes.string.isRequired,
+    handleDelete: PropTypes.func,
+    name: PropTypes.string
+};
 export default memo(DrawShape);

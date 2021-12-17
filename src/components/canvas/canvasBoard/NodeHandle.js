@@ -1,3 +1,4 @@
+import React from 'react';
 import { Handle, Position } from 'react-flow-renderer';
 
 const CustomNode = () => {
@@ -16,10 +17,6 @@ const CustomNode = () => {
         width: '20px',
         height: '20px',
       }}
-    />
-    <CircleIcon
-      style={{}} // Fix the position of the icon over here
-     
     />
    
   </>;

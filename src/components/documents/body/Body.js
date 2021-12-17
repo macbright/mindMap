@@ -12,7 +12,7 @@ import styles from "./body.module.scss";
 
 const Body = () => {
   
-    const { data, isLoading } = useGetAllUsersDocumentsQuery();
+    const { data } = useGetAllUsersDocumentsQuery();
 
     useEffect(() => {
         console.log('data: ', data)

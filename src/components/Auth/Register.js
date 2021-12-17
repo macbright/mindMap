@@ -45,12 +45,13 @@ const Register = () => {
         createUser(userDetails)
     }
     
+               /*eslint-disable */
 
    return (
        <div className={styles.signupDiv}> 
         <Slider />
         <div className={styles.signupRight} >
-            <h1> Let's get started </h1>
+            <h1> &apos; Let's get started </h1>
             <p className={styles.subheading}>Already have an account? <Link to="/login">Sign in</Link>
             </p>
             <p className={styles.error}>{ error?.data}</p>
@@ -59,7 +60,7 @@ const Register = () => {
                 {
                     constant.signupInputs.map((input) =>
                         (
-                           <div className={styles.inputUpperDiv}> <div  key={input.label} className={styles.inputDiv}>
+                           <div className={styles.inputUpperDiv} key={input.label}> <div  key={input.label} className={styles.inputDiv}>
                                 <label >{input.label}</label>
                                 <input
                                     type={input.type}

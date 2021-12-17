@@ -1,11 +1,10 @@
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import EdgeText from './EdgeText';
 import { getMarkerEnd, getBezierPath, Position } from 'react-flow-renderer';
-// import styled from 'styled-components';
 
-// const Path = styled.path`
-// stroke-width: 2px; stroke: #8f92a2; }`;
-
+           /*eslint-disable */
+                      /*eslint-disable display-name */
 const CustomEdge = memo(
   ({
     sourceX,
@@ -49,5 +48,21 @@ const CustomEdge = memo(
     );
   },
 );
+
+
+CustomEdge.propTypes = {
+  sourceX: PropTypes.number,
+    sourceY: PropTypes.number,
+    targetX: PropTypes.number,
+    targetY: PropTypes.number,
+    sourcePosition: PropTypes.number,
+    targetPosition: PropTypes.number,
+    data: PropTypes.object,
+    labelShowBg: PropTypes.string,
+    arrowHeadType: PropTypes.string,
+    markerEndId: PropTypes.string,
+    label: PropTypes.string,
+};
+
 
 export default CustomEdge;

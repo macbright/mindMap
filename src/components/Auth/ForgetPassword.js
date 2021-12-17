@@ -1,9 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from "react-router-dom";
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 
+import * as yup from 'yup';
+
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { ReactComponent as Logo } from  '../../assets/logo.svg';
 import constant from './constant';
@@ -37,7 +38,7 @@ const ForgetPassword = () => {
                 {
                     constant.passwordRecovery.map((input) =>
                         (
-                           <div className={styles.inputUpperDiv}> <div  key={input.label} className={styles.inputDiv}>
+                           <div className={styles.inputUpperDiv} key={input.label}> <div  key={input.label} className={styles.inputDiv}>
                                 <label >{input.label}</label>
                                 <input
                                     type={input.type}
@@ -55,7 +56,7 @@ const ForgetPassword = () => {
 
                 <button  type="submit" className={styles.createBtn}> Continue </button>
             </form>
-            <div className={moreStyles.logoDiv}> <Logo  className={styles.logo, moreStyles.logo}/> </div>
+            <div className={moreStyles.logoDiv}> <Logo  className={`${styles.logo}, ${moreStyles.logo}`}/> </div>
         </div>
         
        </div>

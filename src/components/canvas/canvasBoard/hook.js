@@ -1,3 +1,4 @@
+import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 export function snapToGrid(x, y) {
@@ -15,7 +16,7 @@ export function checkLeftNtop(position){
   return position;
 }
 
-export function checkImageId(imageId){
+export function checkImageId(){
     return uuidv4()
 }
 
@@ -110,43 +111,3 @@ export const getShapesAndRelations = (data, DrawShape) => {
 
   return elements
 }
-
-// data: {label: },
-
-// connectable: true
-// data: {label: {…}}
-// id: "ec5c3c75-8721-4cf1-9e6c-f63c6a5ddab8" // id on canvas
-// imageId: "ec5c3c75-8721-4cf1-9"   // the Shape ID
-// name: "App-Service-Domains"
-// position: {x: 352, y: 192}
-// type: "customNode"
-
-
-// {
-//   "DocumentShapeId": "2E818EED-1A34-4282-5F5B-08D9BA27CFC6",
-//   "ShapeId": "7dbc4e7f-f6b2-4e3a-7173-08d9b66a217c",
-//   "Name": "TestName 3",
-//   "PositionX": 100.5,
-//   "PositionY": 13.5,
-//   "Width": 50,
-//   "Height": 100,
-//   "Radius": null
-// },
-
-
-// arrowHeadColor: "#000"
-// arrowHeadType: "arrowclosed"
-// id: "reactflow__edge-10dedc1c-ff23-401b-b2b9-ca13a6f9780anull-fc86d118-7cce-4b35-af49-693f4db36ec4null"
-// label: "new connection added"
-// source: "10dedc1c-ff23-401b-b2b9-ca13a6f9780a"
-// sourceHandle: null
-// style: {stroke: "#000", strokeWidth: 2, color: "#000"}
-// target: "fc86d118-7cce-4b35-af49-693f4db36ec4"
-// targetHandle: null
-
-// {
-//   "SourceDocumentShapeId": "874548A4-3811-427B-5F5C-08D9BA27CFC6",
-//   "DestinationDocumentShapeId": "E5041FE3-6794-4A66-0517-08D9BA23B8CF",
-//   "Name": "Test"
-// },
-    

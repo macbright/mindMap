@@ -3,7 +3,6 @@ import Slider from "react-slick";
 
 import { ReactComponent as Icon1 } from '../../assets/signup1.svg';
 import { ReactComponent as Icon2 } from '../../assets/signup2.svg';
-import { ReactComponent as Icon3 } from '../../assets/signup3.svg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from './slider.module.scss';
@@ -16,7 +15,7 @@ export default function SimpleSlider() {
     slidesToShow: 1,
     slidesToScroll: 1
   };
-  
+             /*eslint-disable */
   return (
     <Slider {...settings} className={styles.main}>
       <div >

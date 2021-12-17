@@ -4,15 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-
 import { ReactComponent as Logo } from  '../../assets/logo.svg';
 import constant from './constant';
 import Slider from '../slider/Slider';
-import styles from './register.module.scss';
 import {useLoginUserMutation} from "../../store/services/users";
 
 import moreStyles from './login.module.scss';
-
+import styles from './register.module.scss';
 
 const schema = yup.object().shape({
     email: yup.string().email().required(),
@@ -53,13 +51,14 @@ const Login = () => {
         console.log('datas: ', data)
     }
     
-
+               /*eslint-disable */
    return (
        <div className={styles.signupDiv}> 
         <Slider />
         <div className={styles.signupRight} >
             <h1> Sign in to Prodigy </h1>
-            <p className={styles.subheading}>Don't have an account yet? <Link to="/signup">Sign Up </Link>
+ 
+            <p className={styles.subheading}>   Don't have an account yet? <Link to="/signup">Sign Up </Link>
  </p>
             <p className={styles.error}>{ error?.data}</p>
 
@@ -67,7 +66,7 @@ const Login = () => {
                 {
                     constant.signinInputs.map((input) =>
                         (
-                           <div className={styles.inputUpperDiv}> <div  key={input.label} className={styles.inputDiv}>
+                           <div className={styles.inputUpperDiv} key={input.label}> <div  key={input.label} className={styles.inputDiv}>
                                 <label >{input.label}</label>
                                 <input
                                     type={input.type}

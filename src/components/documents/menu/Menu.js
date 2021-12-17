@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 import Body from "../body/Body";
@@ -16,7 +16,7 @@ import styles from "./menu.module.scss";
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { data, isLoading } = useGetUserInfo();
+  const { data } = useGetUserInfo();
   const [toggle, setToggle] = useState(false)
   const [userInfo, setUserInfo] = useState(false)
 

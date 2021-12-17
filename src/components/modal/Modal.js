@@ -1,6 +1,7 @@
 
-import React, { useState, memo } from 'react';
+import React, { memo } from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 
 import styles from './modal.module.scss'
 
@@ -66,5 +67,15 @@ const SimpleModal = ({  setShowModal, showModal, setDocumentName, documentName, 
       );
     
   }
+
+  SimpleModal.propTypes = {
+    setShowModal: PropTypes.func, 
+    showModal: PropTypes.bool, 
+    setDocumentName: PropTypes.func, 
+    documentName: PropTypes.string,  
+    handleCreateDocument: PropTypes.func, 
+    error: PropTypes.string, 
+    setError: PropTypes.func,
+};
 
   export default memo(SimpleModal);

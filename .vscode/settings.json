@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/e5047a2e-4905-496f-81a7-6dc49723ea5a/resourceGroups/rgProjJourney/providers/Microsoft.Web/sites/waProjJourneyWeb",
+    "appService.deploySubpath": "build"
+}

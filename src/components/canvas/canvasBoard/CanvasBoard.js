@@ -2,6 +2,7 @@ import React, {useState, useEffect, memo, useRef} from 'react';
 import ReactFlow, { addEdge, Controls, MiniMap, removeElements, updateEdge } from 'react-flow-renderer';
 import { useDispatch } from 'react-redux';
 import { useParams} from "react-router-dom";
+import html2canvas from "html2canvas";
 
 
 import { useSaveDocumentShapesMutation, 
@@ -9,7 +10,7 @@ import { useSaveDocumentShapesMutation,
 import DrawShape from "../leftMenu/shapes/DrawShape"
 import CustomNode from './NodeHandle';
 import CustomEdge from './customEdge/CustomEdge';
-import {savingElements, savedElements } from '../../../store/slice/canvasElement';
+import {savingElements, savedElements, savePdfSrc } from '../../../store/slice/canvasElement';
 
 
 import { checkImageId, saveShapesRelations, saveShapes, getShapesAndRelations} from './hook';
@@ -31,6 +32,7 @@ const CanvasBoard = () => {
   const [saveDocumentShapes, { isLoading: shapeSaving, isSuccess: shapesSuccess }] = useSaveDocumentShapesMutation();
   const [saveDocumentShapesRelation, { isLoading: relationsSaving, isSuccess: relationSuccess }] = useSaveDocumentShapesRelationMutation();
   const { data } = useGetDocumentByIdQuery(id);
+  const [src, setSrc] = useState("");
 
   const [elements, setElements] = useState([]);
 
@@ -59,6 +61,25 @@ const CanvasBoard = () => {
     if(data) setElements(getShapesAndRelations(data, DrawShape))
   }, [data])
 
+  useEffect(() => {
+    dispatch(savePdfSrc(src ))
+  }, [src])
+
+  useEffect(() => {
+    if (reactFlowInstance && elements.length) {
+      reactFlowInstance.fitView();
+      html2canvas(document.querySelector("#capture")).then((canvas) => {
+        document.body.appendChild(canvas);
+        var image = new Image();
+        image.id = "pic";
+        image.src = canvas.toDataURL();
+        setSrc(image.src);
+        console.log("canvasss", image);
+      });
+    }
+  }, [reactFlowInstance, elements]);
+
+
 
   useEffect(() => {
     dispatch(savingElements(shapeSaving | relationsSaving ))
@@ -69,7 +90,7 @@ const CanvasBoard = () => {
   const onElementsRemove = (elementsToRemove) =>
   setElements((els) => removeElements(elementsToRemove, els));
 
-  const onLoad = (_reactFlowInstance) =>
+  const onLoad = (_reactFlowInstance) => 
   setReactFlowInstance(_reactFlowInstance);
 
   const onDragOver = (event) => {
@@ -127,7 +148,7 @@ const CanvasBoard = () => {
     });
 
     return(
-      <div className={styles.main} ref={reactFlowWrapper} >
+      <div className={styles.main} ref={reactFlowWrapper} id="capture" >
                 <ReactFlow 
                   className={styles.canvas}
                   elements={elements}

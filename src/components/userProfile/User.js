@@ -92,7 +92,7 @@ const User = () => {
             <div className={styles.profileImage}>
                 <div className={styles.imageDiv}>
                     <p>Change photo</p>
-                    {!data && <UserRectangle />}
+                    {!data.avatarContent && <UserRectangle />}
                     {data && <img src={`data:image/png;base64, ${data.avatarContent}`} />}
                 </div>
                 <div className={styles.imageButtonDiv}>

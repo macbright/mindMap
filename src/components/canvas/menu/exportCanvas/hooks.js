@@ -15,11 +15,27 @@ export const downloadFile = ({ data, fileName, fileType }) => {
     a.remove()
   }
 
+const removeString = (string) => {
+  // const newData = {
+  //   "menu": {
+  //     "id": data.menu.id,
+  //     "value": data.menu.value,
+  //     "popup": data.menu.popup,
+  //   }
+  // }
+  // return newData;
+  // const newData = 
+  
+  console.log(string.replace(/\\\//g, "/"))
+
+  return string.replace(/\\\//g, "/");
+}
+
 export const escapeString = (data) => {
   const newData = []
    data.forEach((ele) => {
     let newEle = {
-      JSONOutput: decodeURIComponent(encodeURIComponent(ele.JSONOutput)),
+      JSONOutput: removeString(ele.JSONOutput),
       ShapeId: ele.ShapeId,
       ShapeName: ele.ShapeName,
     }

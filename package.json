@@ -14,6 +14,8 @@
     "@testing-library/user-event": "^12.1.10",
     "@tisoap/react-flow-smart-edge": "^0.3.0",
     "axios": "^0.21.1",
+    "html2canvas": "^1.3.3",
+    "jspdf": "^2.4.0",
     "moveable-helper": "^0.4.0",
     "node-sass": "^6.0.1",
     "prop-types": "^15.7.2",

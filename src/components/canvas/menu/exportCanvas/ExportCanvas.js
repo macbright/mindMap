@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { useParams} from "react-router-dom";
 import PropTypes from "prop-types";
+import { useSelector } from 'react-redux';
+import { jsPDF } from "jspdf";
 
 import { ReactComponent as ExportJson } from '../../../../assets/exportJson.svg';
 import { ReactComponent as ExportPdf } from '../../../../assets/pdf.svg';
@@ -16,6 +18,7 @@ import { downloadFile, escapeString } from './hooks';
 const ExportCanvas = ({setToggle}) => {
     const {id} = useParams();
 
+    const selector = useSelector((state) => state.canvasElements.elements)
     const { data = [] } = useExportingToJsonQuery(id);
     const [exportType, setExportType] = useState('json');
 
@@ -24,7 +27,7 @@ const ExportCanvas = ({setToggle}) => {
         setExportType(val)
     }
 
-      
+    
 
     useEffect(() => {
         
@@ -35,10 +38,17 @@ const ExportCanvas = ({setToggle}) => {
         setToggle();
     }
 
+    const exportPdf = () => {
+        let doc = new jsPDF();
+        doc.text("Octonyan loves jsPDF", 35, 25);
+        doc.save()
+        doc.addImage(selector.pdfImageSrc, "PNG", 0, 0, 5, 1);
+        // console.log(selector.pdfImageSrc,)
+    }
     const  downloadJson = (data) => {
         downloadFile({
           data: JSON.stringify(data),
-          fileName: `${data[0].ShapeId}`,
+          fileName: `${data[0]?.ShapeId}`,
           fileType: 'text/json',
         })
       }
@@ -46,7 +56,10 @@ const ExportCanvas = ({setToggle}) => {
 
     const handleExportCanvas = (e) => {
         e.preventDefault();
-        if(data) downloadJson(escapeString(data));
+        if(data) {
+            if(exportType === 'json') downloadJson(escapeString(data));
+            if(exportType === 'pdf') exportPdf()
+        }
         setToggle();
     }
 

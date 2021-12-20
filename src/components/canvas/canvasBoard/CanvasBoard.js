@@ -67,14 +67,13 @@ const CanvasBoard = () => {
 
   useEffect(() => {
     if (reactFlowInstance && elements.length) {
-      reactFlowInstance.fitView();
+      // reactFlowInstance.fitView();
       html2canvas(document.querySelector("#capture")).then((canvas) => {
         document.body.appendChild(canvas);
-        var image = new Image();
+        let image = new Image();
         image.id = "pic";
-        image.src = canvas.toDataURL();
+        image.src = canvas.toDataURL("image/jpeg");
         setSrc(image.src);
-        console.log("canvasss", image);
       });
     }
   }, [reactFlowInstance, elements]);
@@ -148,8 +147,9 @@ const CanvasBoard = () => {
     });
 
     return(
-      <div className={styles.main} ref={reactFlowWrapper} id="capture" >
+      <div className={styles.main} ref={reactFlowWrapper}  >
                 <ReactFlow 
+                 id="capture"
                   className={styles.canvas}
                   elements={elements}
                   onLoad={onLoad}

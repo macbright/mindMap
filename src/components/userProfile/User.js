@@ -92,8 +92,11 @@ const User = () => {
             <div className={styles.profileImage}>
                 <div className={styles.imageDiv}>
                     <p>Change photo</p>
-                    {!data.avatarContent && <UserRectangle />}
-                    {data && <img src={`data:image/png;base64, ${data.avatarContent}`} />}
+                    {/* {data.avatarContent === undefined && <UserRectangle />} */}
+                    {/* {data && <img src={`data:image/png;base64, ${data.avatarContent}`} />} */}
+                    {!data &&  <UserRectangle /> }
+                    {data && !data.avatarContent &&  <UserRectangle /> }
+                    {data && data.avatarContent && <img src={`data:image/png;base64, ${data.avatarContent}`} />}
                 </div>
                 <div className={styles.imageButtonDiv}>
                     <input className={styles.ok} type="file" name="avatar" accept="image/*" onChange={handleAvatarChange}  ref={inputFile}/>

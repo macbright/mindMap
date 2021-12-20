@@ -39,11 +39,15 @@ const ExportCanvas = ({setToggle}) => {
     }
 
     const exportPdf = () => {
-        let doc = new jsPDF();
-        doc.text("Octonyan loves jsPDF", 35, 25);
+        let doc = new jsPDF({
+            orientation: 'l', // landscape
+            // unit: 'pt', // points, pixels won't work properly
+             format: [1215, 900] // set nee
+        });
+       
+        doc.addImage( selector.pdfImageSrc, "JPEG",  0, 0, 1170, 850);
         doc.save()
-        doc.addImage(selector.pdfImageSrc, "PNG", 0, 0, 5, 1);
-        // console.log(selector.pdfImageSrc,)
+        console.log('DOX: ', selector.pdfImageSrc)
     }
     const  downloadJson = (data) => {
         downloadFile({
@@ -68,6 +72,7 @@ const ExportCanvas = ({setToggle}) => {
           <div className={styles.cancelDiv}>
               <p >  Export Dropdown as </p>
               <Cancel onClick={handleCancelExport}/>
+             
           </div>
           <div className={styles.secondDiv} >
               <div className={styles.jsonDiv}>

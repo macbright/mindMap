@@ -37,12 +37,14 @@
             border: none;
             border: 1px solid #E7E7E7;
             border-radius: 10px;
+            font-family: 'Roboto' !important;
     
             input {
                 height: 30px;
                 border: none;
                 width: 100%;
                 padding: 0px 10px;
+                font-family: 'Roboto' !important;
                 
             }
     
@@ -51,6 +53,7 @@
             }
             svg{
                padding-right: 8px;
+               padding-top: 7px;
                cursor: pointer;
         
             }

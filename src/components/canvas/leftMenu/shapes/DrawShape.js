@@ -36,9 +36,7 @@ const DrawShape = ({ src, handleDelete, name}) => {
     }
 
     const handleContext = (e) => {
-        e.preventDefault();
-        console.log('right click')
-        setImageProp(!imageProp);     
+        e.preventDefault();   
     }
 
     const handleDoubleClick = () => {

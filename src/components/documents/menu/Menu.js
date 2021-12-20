@@ -74,7 +74,8 @@ const Menu = () => {
      <div className={styles.user}>
 
        {!data &&  <UserIcon className={styles.alignVer} /> }
-       {data && <img src={`data:image/png;base64, ${data.avatarContent}`} />}
+       {data && !data.avatarContent &&  <UserIcon className={styles.alignVer} /> }
+       {data && data.avatarContent && <img src={`data:image/png;base64, ${data.avatarContent}`} />}
        <div>
          <p> {data?.userName} </p>
          <span> {data?.email}</span>

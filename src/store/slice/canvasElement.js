@@ -7,7 +7,8 @@ export const canvasElementsSlice = createSlice({
       elements: {
         isSaving: null,
         saved: null,
-        pdfImageSrc: null
+        pdfImageSrc: null,
+        documentData: null
       }
   },
   reducers: {
@@ -20,11 +21,14 @@ export const canvasElementsSlice = createSlice({
     savePdfSrc: (state, action) => {
       state.elements.pdfImageSrc = action.payload;
     },
+    saveDocumentData: (state, action) => {
+      state.elements.documentData = action.payload;
+    },
   },
   
 });
 
-export const {savingElements, savedElements, savePdfSrc } = canvasElementsSlice.actions
+export const {savingElements, savedElements, savePdfSrc, saveDocumentData } = canvasElementsSlice.actions
 
 export const saveStatus = (state) => state[canvasElementsSlice.name].elements;
 

@@ -44,8 +44,9 @@ const ExportCanvas = ({setToggle}) => {
             // unit: 'pt', // points, pixels won't work properly
              format: [1215, 900] // set nee
         });
-       
-        doc.addImage( selector.pdfImageSrc, "JPEG",  0, 0, 1170, 850);
+        doc.setFontSize(80);
+        doc.text(selector.documentData.name, 35, 25);
+        doc.addImage( selector.pdfImageSrc, "JPEG",  15, 40, 1100, 800);
         doc.save()
         console.log('DOX: ', selector.pdfImageSrc)
     }

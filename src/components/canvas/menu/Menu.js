@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ExportCanvas from './exportCanvas/ExportCanvas';
 import { ReactComponent as Export } from '../../../assets/export.svg';
 import { ReactComponent as CanvasLogo } from '../../../assets/canvasLogo.svg';
 import { ReactComponent as Saving } from  '../../../assets/saving.svg';
+import {saveDocumentData } from '../../../store/slice/canvasElement';
 
 
 
@@ -16,10 +17,12 @@ const Menu = ({state}) => {
 
     const [toggle, setToggle] = useState(false)
     const selector = useSelector((state) => state.canvasElements.elements)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         console.log('selector: ', selector)
-    }, [selector])
+        dispatch(saveDocumentData(state))
+    }, [state])
 
     const handleExport = () =>{
         setToggle(!toggle);
